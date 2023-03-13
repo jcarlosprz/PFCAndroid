@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/DarkBlue"
+    tools:context=".fragments.LoginFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="¿Qué estás buscando?"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="28dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"></TextView>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/LightBlue"
+                android:text="Clases particulares y profesores"
+                android:textAllCaps="false"
+                android:textColor="@color/DarkBlue"
+
+                android:textSize="18dp"
+                app:cornerRadius="16dp">
+
+            </com.google.android.material.button.MaterialButton>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/LightBlue"
+                android:text="Alumnos a los que dar clase"
+                android:textAllCaps="false"
+                android:textColor="@color/DarkBlue"
+                android:textSize="18dp"
+                app:cornerRadius="16dp">
+
+            </com.google.android.material.button.MaterialButton>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/LightGreen"
+                android:text="CONTINUAR"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp">
+
+            </com.google.android.material.button.MaterialButton>
+        </LinearLayout>
+    </ScrollView>
+
+
+</FrameLayout>
