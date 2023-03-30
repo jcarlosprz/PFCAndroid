@@ -6,20 +6,21 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.juancarlos.pfc2023.R
-import com.juancarlos.pfc2023.adapters.AnunciosAdapter
+import com.juancarlos.pfc2023.adapters.SavedAdapter
 
 
-class SearchFragment() : Fragment(R.layout.fragment_search) {
+class SavedFragment() : Fragment(R.layout.fragment_saved) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Mostrar el bottoNavigation
+
+        //Mostrar el bottomNavigation
         val mainActivity = activity as MainActivity
         mainActivity.showBottomNavigation()
 
 
-        var rvUserInfo = view.findViewById<RecyclerView>(R.id.rvAnuncios)
-        rvUserInfo.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rvUserInfo.adapter = AnunciosAdapter()
+        var rvSaved = view.findViewById<RecyclerView>(R.id.rvSaved)
+        rvSaved.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rvSaved.adapter = SavedAdapter()
     }
 
 }

@@ -1,4 +1,4 @@
-package com.juancarlos.pfc2023.fragments
+package com.juancarlos.pfc2023.adapters
 
 import android.view.LayoutInflater
 import android.view.View

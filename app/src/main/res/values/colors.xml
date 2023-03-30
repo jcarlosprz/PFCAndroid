@@ -9,11 +9,12 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Colores personalizados -->
-    <color name="DarkBlue">#214F95</color>
-    <color name="LightBlue">#F0F3F9</color>
-    <color name="LightGreen">#99DA7C</color>
-    <color name="LigthGray">#9DA8B7</color>
-    <color name="DarkGray">#3C3C3C</color>
-
+    <color name="background">#E8ECF3</color>
+    <color name="dark_blue">#163667</color>
+    <color name="blue">#214F95</color>
+    <color name="blue_white">#F0F3F9</color>
+    <color name="green">#99DA7C</color>
+    <color name="light_grey">#9DA8B7</color>
+    <color name="dark_gray">#3C3C3C</color>
 
 </resources>

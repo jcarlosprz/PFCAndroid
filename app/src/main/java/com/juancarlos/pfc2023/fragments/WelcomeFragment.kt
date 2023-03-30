@@ -14,23 +14,17 @@ class WelcomeFragment() : Fragment(R.layout.fragment_welcome) {
         //Ocultar el bottomNavigation
         val mainActivity = activity as MainActivity
         mainActivity.hideBottomNavigation()
-        mainActivity.setStatusBarColor("#214F95")
+
 
 
         var botonRegistro = view.findViewById<Button>(R.id.irRegistro)
         var botonLogin = view.findViewById<Button>(R.id.irLogin)
 
         botonRegistro.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container, RegisterFragment())
-                ?.addToBackStack(null)
-                ?.commit()
+            mainActivity.goToFragment(RegisterFragment())
         }
         botonLogin.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container, LoginFragment())
-                ?.addToBackStack(null)
-                ?.commit()
+            mainActivity.goToFragment(LoginFragment())
         }
 
     }

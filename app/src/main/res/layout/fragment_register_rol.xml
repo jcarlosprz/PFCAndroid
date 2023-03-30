@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/DarkBlue"
+    android:background="@color/blue"
     tools:context=".fragments.LoginFragment">
 
     <ScrollView
@@ -38,10 +38,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="@color/LightBlue"
+                android:backgroundTint="@color/blue_white"
                 android:text="Clases particulares y profesores"
                 android:textAllCaps="false"
-                android:textColor="@color/DarkBlue"
+                android:textColor="@color/blue"
 
                 android:textSize="18dp"
                 app:cornerRadius="16dp">
@@ -52,10 +52,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="15dp"
-                android:backgroundTint="@color/LightBlue"
+                android:backgroundTint="@color/blue_white"
                 android:text="Alumnos a los que dar clase"
                 android:textAllCaps="false"
-                android:textColor="@color/DarkBlue"
+                android:textColor="@color/blue"
                 android:textSize="18dp"
                 app:cornerRadius="16dp">
 
@@ -66,7 +66,7 @@
                 android:layout_height="70dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/LightGreen"
+                android:backgroundTint="@color/green"
                 android:text="CONTINUAR"
                 android:textSize="18dp"
                 android:textStyle="bold"

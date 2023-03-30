@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/DarkBlue"
+    android:background="@color/blue"
     tools:context=".fragments.LoginFragment">
 
     <ScrollView
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
 
                 android:hint="Email"
-                android:textColorHint="@color/LigthGray"
+                android:textColorHint="@color/light_grey"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large">
@@ -45,7 +45,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/LightBlue"
+                    android:backgroundTint="@color/blue_white"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:paddingTop="30dp" />
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:hint="Contraseña"
-                android:textColorHint="@color/LigthGray"
+                android:textColorHint="@color/light_grey"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:passwordToggleEnabled="true"
@@ -66,7 +66,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/LightBlue"
+                    android:backgroundTint="@color/blue_white"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingTop="30dp" />
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Recuerdame"
-                    android:textColor="@color/LightBlue"
+                    android:textColor="@color/blue_white"
                     android:textSize="16dp"
                     android:textStyle="normal" />
 
@@ -91,7 +91,7 @@
                     android:id="@+id/rbRecordar"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:buttonTint="@color/LightGreen"
+                    android:buttonTint="@color/green"
                     android:text="" />
             </LinearLayout>
 
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="@color/LightGreen"
+                android:backgroundTint="@color/green"
                 android:text="CONTINUAR"
                 android:textSize="18dp"
                 android:textStyle="bold"
