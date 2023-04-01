@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import com.juancarlos.pfc2023.MainActivity
@@ -42,11 +43,9 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
         ApiRest.initService()
 
         view.findViewById<Button>(R.id.btnLogin).setOnClickListener {
-            login("correo@gmail.com", "contraseaaaA1")
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container, SearchFragment())
-                ?.addToBackStack(null)
-                ?.commit()
+            var email = view.findViewById<EditText>(R.id.etLoginEmail).text.toString()
+            var password = view.findViewById<EditText>(R.id.etLoginPassword).text.toString()
+            login(email, password)
         }
     }
 
@@ -84,6 +83,9 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
                         val getID = sharedPreferencesGet.getInt("userID", 0)
                         Log.i(TAG, "$getToken $getID")
                          */
+                        activity?.supportFragmentManager?.beginTransaction()
+                            ?.replace(R.id.container, SearchFragment())?.addToBackStack(null)
+                            ?.commit()
                     } catch (e: ParseException) {
                         Log.e(TAG, "Failed to parse JWT token: ${e.message}")
                     }
@@ -94,7 +96,7 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
                 }
             }
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.e(TAG, "Error en la solicitud de login: ${t.message}")
             }
 
         })
