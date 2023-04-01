@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.juancarlos.pfc2023.MainActivity
 import com.juancarlos.pfc2023.R
 import com.juancarlos.pfc2023.adapters.AnunciosAdapter
 

@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.juancarlos.pfc2023.R
 
-class SavedAdapter : RecyclerView.Adapter<SavedAdapter.ViewHolder>() {
+class MyPostsAdapter : RecyclerView.Adapter<MyPostsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_guardado, parent, false)
+                .inflate(R.layout.item_mypost, parent, false)
         return ViewHolder(view)
     }
 

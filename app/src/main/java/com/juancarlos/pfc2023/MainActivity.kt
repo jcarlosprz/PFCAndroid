@@ -1,12 +1,11 @@
-package com.juancarlos.pfc2023.fragments
+package com.juancarlos.pfc2023
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.juancarlos.pfc2023.R
+import com.juancarlos.pfc2023.fragments.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<BottomNavigationView>(R.id.bottom_navigation_view).setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_search -> goToFragment(SearchFragment())
-                R.id.action_saved -> goToFragment(SavedFragment())
+                R.id.action_saved -> goToFragment(MyPostsFragment())
                 R.id.action_profile -> goToFragment(ProfileFragment())
             }
             true

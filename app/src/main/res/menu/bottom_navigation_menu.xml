@@ -3,11 +3,11 @@
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search"
-        android:title="Buscar" />
+        android:title="Explorar" />
     <item
         android:id="@+id/action_saved"
-        android:icon="@drawable/ic_saved"
-        android:title="Guardados" />
+        android:icon="@drawable/ic_post"
+        android:title="Mis anuncios" />
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/ic_profile"

@@ -10,7 +10,7 @@ class AnunciosAdapter : RecyclerView.Adapter<AnunciosAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_anuncio_profesor, parent, false)
+                .inflate(R.layout.item_teacher_post, parent, false)
         return ViewHolder(view)
     }
 

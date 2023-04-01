@@ -3,11 +3,8 @@ package com.juancarlos.pfc2023.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.juancarlos.pfc2023.MainActivity
 import com.juancarlos.pfc2023.R
-
-import com.juancarlos.pfc2023.adapters.SavedAdapter
 
 
 class EditProfileFragment() : Fragment(R.layout.fragment_profile_edit) {
