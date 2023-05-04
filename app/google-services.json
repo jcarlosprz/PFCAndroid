@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "325346226155",
+    "project_id": "pfc2023-f971c",
+    "storage_bucket": "pfc2023-f971c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325346226155:android:4814f56da996ac910c73ae",
+        "android_client_info": {
+          "package_name": "com.juancarlos.pfc2023"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325346226155-nesj6cqrn1beo9scged875i510ismkfk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVqvz3TBvXBOvi78D2c6-tGBbuDnt3l5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325346226155-nesj6cqrn1beo9scged875i510ismkfk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
