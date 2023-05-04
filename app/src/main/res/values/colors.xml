@@ -17,4 +17,16 @@
     <color name="light_grey">#9DA8B7</color>
     <color name="dark_gray">#3C3C3C</color>
     <color name="red">#FF1200</color>
+
+    <!--PRIMARY COLOR-->
+    <color name="indigo_50">#E8EAF6</color>
+    <color name="indigo_100">#C5CAE9</color>
+    <color name="indigo_200">#9FA8DA</color>
+    <color name="indigo_300">#7986CB</color>
+    <color name="indigo_400">#5C6BC0</color>
+    <color name="indigo_500">#3F51B5</color>
+    <color name="indigo_600">#3949AB</color>
+    <color name="indigo_700">#303F9F</color>
+    <color name="indigo_800">#283593</color>
+    <color name="indigo_900">#1A237E</color>
 </resources>

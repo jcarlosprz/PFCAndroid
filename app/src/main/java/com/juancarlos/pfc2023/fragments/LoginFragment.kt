@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import com.juancarlos.pfc2023.MainActivity
 import com.juancarlos.pfc2023.R
 import com.juancarlos.pfc2023.api.ApiRest
-import com.juancarlos.pfc2023.api.LoginCredentials
-import com.juancarlos.pfc2023.api.LoginResponse
+import com.juancarlos.pfc2023.api.data.LoginCredentials
+import com.juancarlos.pfc2023.api.data.LoginResponse
 import com.nimbusds.jwt.JWT
 import com.nimbusds.jwt.JWTClaimsSet
 import com.nimbusds.jwt.JWTParser
@@ -45,7 +45,10 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
         view.findViewById<Button>(R.id.btnLogin).setOnClickListener {
             var email = view.findViewById<EditText>(R.id.etLoginEmail).text.toString()
             var password = view.findViewById<EditText>(R.id.etLoginPassword).text.toString()
-            login(email, password)
+           // login(email, password)
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.container, SearchFragment())?.addToBackStack(null)
+                ?.commit()
         }
     }
 

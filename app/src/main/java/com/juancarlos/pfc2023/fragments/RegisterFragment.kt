@@ -3,13 +3,14 @@ package com.juancarlos.pfc2023.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.juancarlos.pfc2023.MainActivity
 import com.juancarlos.pfc2023.R
 import com.juancarlos.pfc2023.api.ApiRest
-import com.juancarlos.pfc2023.api.RegisterData
-import com.juancarlos.pfc2023.api.RegisterResponse
+import com.juancarlos.pfc2023.api.data.RegisterData
+import com.juancarlos.pfc2023.api.data.RegisterResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,20 +20,27 @@ class RegisterFragment() : Fragment(R.layout.fragment_register) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ApiRest.initService()
-        newUser()
+
 
         //Ocultar el bottomNavigation
         val mainActivity = activity as MainActivity
         mainActivity.hideBottomNavigation()
-        view.findViewById<EditText>(R.id.etDate).setOnClickListener() {
+        view.findViewById<EditText>(R.id.etRegisterDate).setOnClickListener() {
             showDatePickerDialog()
         }
 
+        view.findViewById<Button>(R.id.btnRegister).setOnClickListener {
+            var email = view.findViewById<EditText>(R.id.etRegisterEmail).text.toString()
+            var username = view.findViewById<EditText>(R.id.etRegisterName).text.toString()
+            var password = view.findViewById<EditText>(R.id.etRegisterPassword).text.toString()
+            register(email, password, username)
+            mainActivity.goToFragment(LoginFragment())
+        }
 
     }
 
-    private fun newUser() {
-        val crearUser = RegisterData("correo@gmail.com", "contraseaaaA1", "fecha")
+    private fun register(email: String, password: String, username: String) {
+        val crearUser = RegisterData(email, password, username)
         val call = ApiRest.service.meterUser(crearUser)
         call.enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(
@@ -62,7 +70,7 @@ class RegisterFragment() : Fragment(R.layout.fragment_register) {
 
     private fun onDateSelected(day: Int, month: Int, year: Int) {
         var numberMonth = month + 1;
-        view?.findViewById<EditText>(R.id.etDate)
+        view?.findViewById<EditText>(R.id.etRegisterDate)
             ?.setText("$day/$numberMonth/$year")
     }
 

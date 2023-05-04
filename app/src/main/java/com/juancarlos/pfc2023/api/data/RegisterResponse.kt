@@ -1,4 +1,4 @@
-package com.juancarlos.pfc2023.api
+package com.juancarlos.pfc2023.api.data
 
 data class RegisterResponse(
     val jwt: String,
