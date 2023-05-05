@@ -21,21 +21,35 @@
 
             <Button
                 android:id="@+id/btnPEGuardar"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GUARDAR"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></Button>
 
             <Button
                 android:id="@+id/btnPEDelete"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ELIMINAR CUENTA"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnPEGuardar"></Button>
+
+            <Button
+                android:id="@+id/btnGaleria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GALERIA"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnPEDelete"></Button>
+
+            <Button
+                android:id="@+id/btnCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAMARA"
+                app:layout_constraintStart_toEndOf="@+id/btnGaleria"
+                app:layout_constraintTop_toBottomOf="@+id/btnPEDelete"></Button>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
