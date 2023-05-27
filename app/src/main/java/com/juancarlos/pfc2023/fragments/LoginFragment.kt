@@ -41,7 +41,7 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
 
         //Iniciamos el APIRest
         ApiRest.initService()
-
+        login("guillermovl@gmail.com", "Guille123")
         view.findViewById<Button>(R.id.btnLogin).setOnClickListener {
             var email = view.findViewById<EditText>(R.id.etLoginEmail).text.toString()
             var password = view.findViewById<EditText>(R.id.etLoginPassword).text.toString()
@@ -79,13 +79,6 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
                         editor.putInt("userID", userId)
                         editor.apply()
 
-                        /**
-                        //Obtenemos los datos del local
-                        val sharedPreferencesGet = requireContext().getSharedPreferences("login", Context.MODE_PRIVATE)
-                        val getToken = sharedPreferencesGet.getString("token", "")
-                        val getID = sharedPreferencesGet.getInt("userID", 0)
-                        Log.i(TAG, "$getToken $getID")
-                         */
                         activity?.supportFragmentManager?.beginTransaction()
                             ?.replace(R.id.container, SearchFragment())?.addToBackStack(null)
                             ?.commit()

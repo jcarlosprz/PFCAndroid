@@ -1,6 +1,7 @@
 package com.juancarlos.pfc2023.fragments
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -10,11 +11,13 @@ import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.juancarlos.pfc2023.MainActivity
@@ -29,8 +32,11 @@ import java.util.*
 
 
 class EditProfileFragment() : Fragment(R.layout.fragment_profile_edit) {
-    //Usuario
-    lateinit var user: UserData
+    lateinit var imgProfile: ImageView
+    lateinit var currentUserData: UserData //Usuario
+    lateinit var mainActivity: MainActivity
+    lateinit var currentUserId: String
+    var imgURLFirebase: String = ""
 
     //PARA ACCEDER A GALERIA Y CAMARA
     private val REQUEST_CODE_PERMISSIONS = 1
@@ -42,111 +48,140 @@ class EditProfileFragment() : Fragment(R.layout.fragment_profile_edit) {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { ok ->
             if (ok) {
                 latestTmpUri?.let { uri ->
-                    ivImage.setImageURI(uri)
-                    uploadFile(uri)
+                    imgProfile.setImageURI(uri)
+                    uploadIMG(uri)
                 }
             }
         }
-    private lateinit var ivImage: ImageView
-    var imgURLFirebase: String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Declaracion de variables
+        mainActivity = activity as MainActivity
+        currentUserId = mainActivity.getCurrentUser().toString()
+
 
         //Mostrar el bottomNavigation
-        val mainActivity = activity as MainActivity
-        mainActivity.showBottomNavigation()
+        this.mainActivity.showBottomNavigation()
+
         ApiRest.initService()
-        getUser("22", view)
+        getUser(currentUserId, view)
+        //Función Guardar (Actualiza el usuario con un PUT)
         view.findViewById<Button>(R.id.btnPEGuardar).setOnClickListener {
-            user.description = view.findViewById<TextView>(R.id.etPEDescription).text.toString()
-            user.contactEmail = view.findViewById<TextView>(R.id.etPEEmail).text.toString()
-            user.contactPhone = view.findViewById<TextView>(R.id.etPEPhone).text.toString()
-            user.imgURL=imgURLFirebase
-            Log.i("URL", imgURLFirebase)
-            Log.i("URL", user.imgURL)
-            updateUser("22", user)
-            mainActivity.goToFragment(ProfileFragment())
+            //Actualiza los valores del objeto
+            currentUserData.description =
+                view.findViewById<TextView>(R.id.etPEDescription).text.toString()
+            currentUserData.contactEmail =
+                view.findViewById<TextView>(R.id.etPEEmail).text.toString()
+            currentUserData.contactPhone =
+                view.findViewById<TextView>(R.id.etPEPhone).text.toString()
+            currentUserData.imgURL = imgURLFirebase
+            updateUser(currentUserId, currentUserData)
+
         }
+
+        //Eliminar usuario
         view.findViewById<Button>(R.id.btnPEDelete).setOnClickListener {
-            deleteUser("19")
+            deleteUser(currentUserId)
+            mainActivity.goToFragment(LoginFragment())
         }
-        //REVISA PERMISOS
-        ivImage = view.findViewById(R.id.profile_image)
-        checkPermissions()
+
+        //Pop-up
+        view.findViewById<ImageView>(R.id.imgProfileItem).setOnClickListener {
+            showPopup()
+        }
+        //Abrir Galeria y Camara
+        imgProfile = view.findViewById(R.id.imgProfileItem)
+
+
+    }
+
+    //Pop-up
+    private fun showPopup() {
+        val builder = AlertDialog.Builder(requireContext())
+        val inflater = requireActivity().layoutInflater
+        val view = inflater.inflate(R.layout.camera_or_gallery_popup, null)
+        builder.setView(view)
+
+        // Configurar botones u otros elementos en el layout personalizado
+
+        builder.setPositiveButton("Aceptar") { dialog, which ->
+            // Acciones al hacer clic en el botón "Aceptar"
+            Toast.makeText(requireContext(), "Aceptar", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("Cancelar") { dialog, which ->
+            // Acciones al hacer clic en el botón "Cancelar"
+            Toast.makeText(requireContext(), "Cancelar", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
         view.findViewById<Button>(R.id.btnGaleria).setOnClickListener {
+            checkPermissions()
             startGallery()
         }
-        view.findViewById<Button>(R.id.btnCamera).setOnClickListener { startCamera() }
-
-    }
-
-    //CAMERA Y GALERIA
-    private fun checkPermissions() {
-        if (!permissionsGranted()) {
-            ActivityCompat.requestPermissions(
-                this.requireActivity(),
-                REQUIRED_PERMISSIONS,
-                REQUEST_CODE_PERMISSIONS
-            )
+        view.findViewById<Button>(R.id.btnCamera).setOnClickListener {
+            checkPermissions()
+            startCamera()
         }
+        val dialog = builder.create()
+        dialog.show()
     }
-
+    //Verifica si todos los permisos necesarios han sido otorgados por el usuario
     fun permissionsGranted(): Boolean = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
-    val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        ivImage.setImageURI(uri)
-        uploadFile(uri)
+    //Revisa los permisos necesarios para usar la cámara
+    private fun checkPermissions() {
+        if (!permissionsGranted()) {
+            ActivityCompat.requestPermissions(
+                this.requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+            )
+        }
     }
 
-    private fun uploadFile(file: Uri?) {
+    //Permite seleccionar una imagen
+    val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        imgProfile.setImageURI(uri)
+        uploadIMG(uri)
+    }
+
+    //Sube la imagen a Firebase
+    private fun uploadIMG(file: Uri?) {
         file?.let { //Comprueba de forma boleana si es nulo
             val extension = getFileExtension(file)
-
-            val imageRef = FirebaseStorage.getInstance()
-                .reference
-                .child("notes/images/${UUID.randomUUID()}.$extension")
+            val imageRef =
+                FirebaseStorage.getInstance().reference.child("notes/images/${UUID.randomUUID()}.$extension")
             val riversRef = imageRef.child("images/${file.lastPathSegment}")
             val uploadTask = riversRef.putFile(file)
 
             uploadTask.addOnFailureListener {
-
+                Log.e("uploadFile", it.toString())
             }.addOnSuccessListener { taskSnapshot ->
                 getUrl(taskSnapshot)
-
             }
 
         }
     }
 
+    //Obtiene el URL de la imagen (de Firebase)
     private fun getUrl(taskSnapshot: UploadTask.TaskSnapshot?) {
         taskSnapshot?.storage?.downloadUrl?.addOnSuccessListener {
             imgURLFirebase = it.toString()
         }?.addOnFailureListener {
-            Log.e("MainActivity", it.toString())
+            Log.e("getUrl", it.toString())
 
         }
     }
 
+    //Obtiene la extensión del archivo que se ha seleccionado
     fun getFileExtension(uri: Uri): String? {
         val contentResolver = requireContext().contentResolver
         val mime = MimeTypeMap.getSingleton()
         return mime.getExtensionFromMimeType(contentResolver?.getType(uri)) ?: "png"
     }
 
-    fun startCamera() {
-        if (permissionsGranted()) {
-            getTmpFileUri().let { uri ->
-                latestTmpUri = uri
-                takeImageResult.launch(uri)
-            }
-        } else {
-            //Mostrar error al usuario
-        }
-    }
-
+    //Crea un archivo temporal para almacenar temporalmente una imagen (Camara).
     private fun getTmpFileUri(): Uri {
         val tmpFile =
             File.createTempFile("tmp_image_file", ".png", requireContext().cacheDir).apply {
@@ -154,73 +189,107 @@ class EditProfileFragment() : Fragment(R.layout.fragment_profile_edit) {
                 deleteOnExit()
             }
         return FileProvider.getUriForFile(
-            requireContext().applicationContext,
-            "${requireContext().packageName}.provider",
-            tmpFile
+            requireContext().applicationContext, "${requireContext().packageName}.provider", tmpFile
         )
     }
 
+    //Ejecución de la camara
+    fun startCamera() {
+        if (permissionsGranted()) {
+            getTmpFileUri().let { uri ->
+                latestTmpUri = uri
+                takeImageResult.launch(uri)
+            }
+        } else {
+            Log.e(
+                "startCamera", "Error while accesing the camera, Check the required permissions"
+            )
+        }
+    }
+
+    //Ejecución de la galeria
     private fun startGallery() {
         getContent.launch("image/*")
     }
 
-    //CONSULTAS API
+    /**
+     * CONSULTAS A LA API
+     */
+    //Get del usuario
     private fun getUser(id: String, view: View) {
         val call = ApiRest.service.getUserById(id)
         call.enqueue(object : Callback<UserData> {
             override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
-                // maneja la respuesta exitosa aquí
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
-                    user = body
-                    view.findViewById<TextView>(R.id.tvPEName).text = user.name
-                    view.findViewById<TextView>(R.id.tvPEUsername).text = "@" + user.username
-                    view.findViewById<TextView>(R.id.etPEDescription).text = user.description
-                    view.findViewById<TextView>(R.id.etPEEmail).text = user.contactEmail
-                    view.findViewById<TextView>(R.id.etPEPhone).text = user.contactPhone
+                    currentUserData = body
+                    val tvName = view.findViewById<TextView>(R.id.tvPEName)
+                    val tvUsername = view.findViewById<TextView>(R.id.tvPEUsername)
+                    val etDescription = view.findViewById<TextView>(R.id.etPEDescription)
+                    val etContactEmail = view.findViewById<TextView>(R.id.etPEEmail)
+                    val etContactPhone = view.findViewById<TextView>(R.id.etPEPhone)
+                    tvName.text = currentUserData.name
+                    tvUsername.text = "@" + currentUserData.username
+                    etDescription.text = currentUserData.description
+                    etContactEmail.text = currentUserData.contactEmail
+                    etContactPhone.text = currentUserData.contactPhone
+                    Glide.with(view)
+                        .load(currentUserData.imgURL)
+                        .into(imgProfile)
                 } else {
-                    Log.e("EditProfileFragment", response.errorBody()?.string() ?: "Error")
+                    Log.e("getUser", response.errorBody()?.string() ?: "Error getting user:")
                 }
             }
-
             override fun onFailure(call: Call<UserData>, t: Throwable) {
-                Log.e("EditProfileFragment", "Error: ${t.message}")
+                Log.e("getUser", "Error: ${t.message}")
             }
         })
     }
 
-
+    //Put del usuario (completo)
     private fun updateUser(id: String, updatedUser: UserData) {
         val call = ApiRest.service.updateUser(updatedUser, id)
         call.enqueue(object : Callback<UserData> {
             override fun onResponse(call: Call<UserData>, response: Response<UserData>) {
-                // maneja la respuesta exitosa aquí
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
-                    // procesa la respuesta aquí
+                    Toast.makeText(
+                        mainActivity.applicationContext,
+                        "Usuario actualizado",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                    mainActivity.goToFragment(ProfileFragment())
                 } else {
-                    Log.e("EditProfileFragment", response.errorBody()?.string() ?: "Error")
+                    Log.e("updateUser", response.errorBody()?.string() ?: "Error updating user")
                 }
             }
 
             override fun onFailure(call: Call<UserData>, t: Throwable) {
-                Log.e("EditProfileFragment", "Error: ${t.message}")
+                Log.e("updateUser", "Error: ${t.message}")
             }
         })
     }
+
+    //Delete del usuario (completo
     private fun deleteUser(id: String) {
         val call = ApiRest.service.deleteUser(id)
         call.enqueue(object : Callback<Unit> {
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                 if (response.isSuccessful) {
-                    // El usuario ha sido eliminado con éxito
+                    Toast.makeText(
+                        mainActivity.applicationContext,
+                        "Cuenta eliminada",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
                 } else {
-                    // Ha habido un error en la petición DELETE
+                    Log.e("deleteUser", response.errorBody()?.string() ?: "Error deleting user")
                 }
             }
 
             override fun onFailure(call: Call<Unit>, t: Throwable) {
-                // Ha habido un error en la comunicación con el servidor
+                Log.e("deleteUser", "Error: ${t.message}")
             }
         })
     }

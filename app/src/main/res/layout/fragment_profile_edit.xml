@@ -35,24 +35,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnPEGuardar"></Button>
 
-            <Button
-                android:id="@+id/btnGaleria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="GALERIA"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnPEDelete"></Button>
-
-            <Button
-                android:id="@+id/btnCamera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CAMARA"
-                app:layout_constraintStart_toEndOf="@+id/btnGaleria"
-                app:layout_constraintTop_toBottomOf="@+id/btnPEDelete"></Button>
-
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
+                android:id="@+id/imgProfileItem"
                 android:layout_width="135dp"
                 android:layout_height="134dp"
                 android:layout_marginTop="10dp"
@@ -73,7 +57,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_image"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/imgProfileItem"></TextView>
 
             <TextView
                 android:id="@+id/tvPEUsername"
@@ -131,7 +115,7 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/profile_image"></TextView>
+                        app:layout_constraintTop_toBottomOf="@+id/imgProfileItem"></TextView>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"

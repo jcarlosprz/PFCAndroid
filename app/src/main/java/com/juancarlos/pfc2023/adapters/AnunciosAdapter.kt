@@ -3,10 +3,14 @@ package com.juancarlos.pfc2023.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.juancarlos.pfc2023.R
+import com.juancarlos.pfc2023.api.data.AdsListResponse
 
-class AnunciosAdapter : RecyclerView.Adapter<AnunciosAdapter.ViewHolder>() {
+class AnunciosAdapter(private val adsList: List<AdsListResponse.Data>) :
+    RecyclerView.Adapter<AnunciosAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context)
@@ -15,21 +19,30 @@ class AnunciosAdapter : RecyclerView.Adapter<AnunciosAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //  holder.bind(data[position])
+        holder.bind(adsList[position])
+
     }
 
-    override fun getItemCount(): Int = 7
+    override fun getItemCount(): Int {
+        // Devuelve la cantidad de elementos en la lista itemList
+        return adsList.size
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        //  fun bind(item:AgentsResponse.Agent) {
+        fun bind(data: AdsListResponse.Data) {
+            var imgProfile = itemView.findViewById<ImageView>(R.id.imgProfileItem)
+            var name = itemView.findViewById<TextView>(R.id.tvItemName)
+            var username = itemView.findViewById<TextView>(R.id.tvItemUsername)
+            // var imgProfile = itemView.findViewById<ImageView>(R.id.imgProfileItem)
 
-        //  itemView.setOnClickListener {
-        //     Log.v("Pulso sobre", item.displayName.toString())
+            //  itemView.setOnClickListener {
+            //     Log.v("Pulso sobre", item.displayName.toString())
 
-        //  }
+            //  }
+        }
+
+
     }
-
-
 }
 

@@ -23,7 +23,7 @@
             android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
+                android:id="@+id/imgProfileItem"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_marginLeft="20dp"
@@ -42,12 +42,12 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="left"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_image"
-                app:layout_constraintStart_toEndOf="@+id/profile_image"
-                app:layout_constraintTop_toTopOf="@+id/profile_image">
+                app:layout_constraintBottom_toBottomOf="@+id/imgProfileItem"
+                app:layout_constraintStart_toEndOf="@+id/imgProfileItem"
+                app:layout_constraintTop_toTopOf="@+id/imgProfileItem">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tvItemName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre"
@@ -58,7 +58,7 @@
                 </TextView>
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tvItemUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -71,6 +71,7 @@
 
 
             <TextView
+                android:id="@+id/tvItemDescription"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
@@ -79,7 +80,7 @@
                 android:textSize="16dp"
                 android:text="Descripción"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/profile_image"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/imgProfileItem"></TextView>
 
             <TextView
                 android:id="@+id/textView"

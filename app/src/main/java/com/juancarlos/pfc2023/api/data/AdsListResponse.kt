@@ -1,7 +1,8 @@
 package com.juancarlos.pfc2023.api.data
 
-data class AdsResponse(
+data class AdsListResponse(
     val `data`: List<Data>,
+    val meta: Meta
 ) {
     data class Data(
         val attributes: Attributes,
@@ -18,4 +19,14 @@ data class AdsResponse(
         )
     }
 
+    data class Meta(
+        val pagination: Pagination
+    ) {
+        data class Pagination(
+            val page: Int,
+            val pageCount: Int,
+            val pageSize: Int,
+            val total: Int
+        )
+    }
 }

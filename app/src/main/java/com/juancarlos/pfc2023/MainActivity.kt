@@ -1,11 +1,17 @@
 package com.juancarlos.pfc2023
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.juancarlos.pfc2023.fragments.*
+import com.juancarlos.pfc2023.fragments.MyPostsFragment
+import com.juancarlos.pfc2023.fragments.ProfileFragment
+import com.juancarlos.pfc2023.fragments.SearchFragment
+import com.juancarlos.pfc2023.fragments.WelcomeFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,9 +29,19 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+
     //Navegacion BottonNavigationView entre fragments
     fun goToFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+    }
+
+    //Obtener el id del usuario loggeado (del local)
+    fun getCurrentUser(): Int {
+        //Obtenemos los datos del local
+        val sharedPreferencesGet = this.getSharedPreferences("login", Context.MODE_PRIVATE)
+        val getToken = sharedPreferencesGet.getString("token", "")
+        val getID = sharedPreferencesGet.getInt("userID", 0)
+        return getID
     }
 
     //Ocultar el bottom navigation

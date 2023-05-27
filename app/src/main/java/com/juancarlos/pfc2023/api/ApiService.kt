@@ -2,7 +2,6 @@ package com.juancarlos.pfc2023.api
 
 import com.juancarlos.pfc2023.api.data.*
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -19,20 +18,22 @@ interface ApiService {
         @Body credentials: LoginCredentials
     ): Call<LoginResponse>
 
-    //Lista Ads
-    /**
-    @GET("/api/ads") //
-    fun getAds(): Call<AdsResponse>
-*/
+    //Actualizar Usuario
     @PUT("users/{id}") //
     fun updateUser(
         @Body updatedUser: UserData,
         @Path("id") id: String
     ): Call<UserData>
 
+    //Get del Usuario
     @GET("users/{id}")
     fun getUserById(@Path("id") id: String): Call<UserData>
 
+    //Borrar Usuario
     @DELETE("users/{id}")
     fun deleteUser(@Path("id") id: String): Call<Unit>
+
+    //Get Lista Ads
+    @GET("ads") //
+    fun getAds(): Call<AdsListResponse>
 }
