@@ -14,6 +14,7 @@ import com.juancarlos.pfc2023.fragments.SearchFragment
 import com.juancarlos.pfc2023.fragments.WelcomeFragment
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,21 +29,26 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
     }
 
     //Navegacion BottonNavigationView entre fragments
-    fun goToFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+    fun goToFragment(fragment: Fragment, addToBackStack: Boolean = false) {
+        val transaction = supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
+        if (addToBackStack) {
+            transaction.addToBackStack(null)
+        }
+        transaction.commit()
     }
 
     //Obtener el id del usuario loggeado (del local)
     fun getCurrentUser(): Int {
-        //Obtenemos los datos del local
         val sharedPreferencesGet = this.getSharedPreferences("login", Context.MODE_PRIVATE)
-        val getToken = sharedPreferencesGet.getString("token", "")
+        //val getToken = sharedPreferencesGet.getString("token", "")
         val getID = sharedPreferencesGet.getInt("userID", 0)
         return getID
     }
+
 
     //Ocultar el bottom navigation
     fun hideBottomNavigation() {

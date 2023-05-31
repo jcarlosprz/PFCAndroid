@@ -1,11 +1,13 @@
 package com.juancarlos.pfc2023.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.juancarlos.pfc2023.R
 import com.juancarlos.pfc2023.api.data.AdsListResponse
 
@@ -36,10 +38,9 @@ class AnunciosAdapter(private val adsList: List<AdsListResponse.Data>) :
             var username = itemView.findViewById<TextView>(R.id.tvItemUsername)
             // var imgProfile = itemView.findViewById<ImageView>(R.id.imgProfileItem)
 
-            //  itemView.setOnClickListener {
-            //     Log.v("Pulso sobre", item.displayName.toString())
+              itemView.setOnClickListener {
 
-            //  }
+              }
         }
 
 

@@ -36,4 +36,8 @@ interface ApiService {
     //Get Lista Ads
     @GET("ads") //
     fun getAds(): Call<AdsListResponse>
+
+    @GET("users/{id}?populate=ads")
+    fun getUserAds(@Path("id") id: String): Call<UserAdsResponse>
+
 }

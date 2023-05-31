@@ -23,13 +23,29 @@ import java.text.ParseException
 
 
 class LoginFragment() : Fragment(R.layout.fragment_login) {
-    val TAG = "MainActivity"
+    lateinit var mainActivity: MainActivity
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainActivity = activity as MainActivity
 
         //Ocultar el bottomnavigation
-        val mainActivity = activity as MainActivity
         mainActivity.hideBottomNavigation()
+
+        //Comprobar si hay una sesión iniciada
+        var currentUserId = mainActivity.getCurrentUser()
+        if (currentUserId > 0) {
+            mainActivity.goToFragment(SearchFragment())
+        }
+        //Hacer Login al pulsar el botón
+        ApiRest.initService()
+        val btnLogin = view.findViewById<Button>(R.id.btnLogin)
+        btnLogin.setOnClickListener {
+            val email = view.findViewById<EditText>(R.id.etLoginEmail).text.toString()
+            val password = view.findViewById<EditText>(R.id.etLoginPassword).text.toString()
+            login(email, password)
+            //login("guillermovl@gmail.com", "Guille123")
+        }
 
         //Radio Button Recuerdame
         val radioButton = view.findViewById<RadioButton>(R.id.rbRecordar)
@@ -39,62 +55,49 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
             radioButton.isChecked = isChecked
         }
 
-        //Iniciamos el APIRest
-        ApiRest.initService()
-        login("guillermovl@gmail.com", "Guille123")
-        view.findViewById<Button>(R.id.btnLogin).setOnClickListener {
-            var email = view.findViewById<EditText>(R.id.etLoginEmail).text.toString()
-            var password = view.findViewById<EditText>(R.id.etLoginPassword).text.toString()
-           // login(email, password)
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container, SearchFragment())?.addToBackStack(null)
-                ?.commit()
-        }
+
     }
 
+    //Consulta para el Login
     private fun login(usernameOrEmail: String, password: String) {
-
         val credentials = LoginCredentials(usernameOrEmail, password)
         val call = ApiRest.service.login(credentials)
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
-                call: Call<LoginResponse>,
-                response: Response<LoginResponse>
+                call: Call<LoginResponse>, response: Response<LoginResponse>
             ) {
-                // maneja la respuesta exitosa aquí
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
                     val tokenString = response.body()?.jwt
-                    //Sacar id del usuario loggeado con el token
                     try {
-                        val jwt: JWT = JWTParser.parse(tokenString)
-                        val claimsSet: JWTClaimsSet = jwt.jwtClaimsSet
-                        val userId: Int = claimsSet.getIntegerClaim("id")
-
-                        //Guardamos el id y el token en local
-                        val sharedPreferences =
-                            requireContext().getSharedPreferences("login", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("token", tokenString)
-                        editor.putInt("userID", userId)
-                        editor.apply()
-
-                        activity?.supportFragmentManager?.beginTransaction()
-                            ?.replace(R.id.container, SearchFragment())?.addToBackStack(null)
-                            ?.commit()
+                        saveLoginLocally(tokenString!!)
+                        mainActivity.goToFragment(SearchFragment(), true)
                     } catch (e: ParseException) {
-                        Log.e(TAG, "Failed to parse JWT token: ${e.message}")
+                        Log.e("LoginFragment", "Failed to parse JWT token: ${e.message}")
                     }
-
-
                 } else {
-                    Log.e(TAG, response.errorBody()?.string() ?: "Error")
+                    Log.e("LoginFragment", response.errorBody()?.string() ?: "Error")
                 }
             }
+
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e(TAG, "Error en la solicitud de login: ${t.message}")
+                Log.e("LoginFragment", "Error en la solicitud de login: ${t.message}")
             }
 
         })
+    }
+
+    //Guardamos el id y el token en local
+    private fun saveLoginLocally(JWTtoken: String) {
+        //Sacar id del usuario loggeado con el token
+        val jwt: JWT = JWTParser.parse(JWTtoken)
+        val claimsSet: JWTClaimsSet = jwt.jwtClaimsSet
+        val userId: Int = claimsSet.getIntegerClaim("id")
+
+        val sharedPreferences = requireContext().getSharedPreferences("login", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("token", JWTtoken)
+        editor.putInt("userID", userId)
+        editor.apply()
     }
 }
