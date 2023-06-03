@@ -5,8 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.juancarlos.pfc2023.R
+import com.juancarlos.pfc2023.api.data.UserAdsResponse
 
-class MyPostsAdapter : RecyclerView.Adapter<MyPostsAdapter.ViewHolder>() {
+class MyPostsAdapter(myads: List<UserAdsResponse.Ad>) : RecyclerView.Adapter<MyPostsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context)
