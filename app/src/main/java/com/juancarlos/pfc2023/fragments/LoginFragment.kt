@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.juancarlos.pfc2023.MainActivity
 import com.juancarlos.pfc2023.R
@@ -16,6 +17,7 @@ import com.juancarlos.pfc2023.api.data.LoginResponse
 import com.nimbusds.jwt.JWT
 import com.nimbusds.jwt.JWTClaimsSet
 import com.nimbusds.jwt.JWTParser
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +36,7 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
 
         //Comprobar si hay una sesión iniciada
         var currentUserId = mainActivity.getCurrentUser()
+        //var currentUserId = -1
         if (currentUserId > 0) {
             mainActivity.goToFragment(SearchFragment())
         }
@@ -76,7 +79,17 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
                         Log.e("LoginFragment", "Failed to parse JWT token: ${e.message}")
                     }
                 } else {
-                    Log.e("LoginFragment", response.errorBody()?.string() ?: "Error")
+                    val errorBody = response.errorBody()?.string()
+                    val errorJson = JSONObject(errorBody)
+                    val errorObject = errorJson.getJSONObject("error")
+                    val errorMessage = errorObject.getString("message")
+                    var tvError = view?.findViewById<TextView>(R.id.tvLoginError)
+                    if (errorMessage == "identifier is a required field" || errorMessage == "password is a required field") {
+                        tvError?.text = "Rellena todos los campos"
+                    } else if (errorMessage == "Invalid identifier or password") {
+                        tvError?.text = "Usuario o contraseña incorrectos"
+                    }
+
                 }
             }
 
