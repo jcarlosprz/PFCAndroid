@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="164dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
     android:backgroundTint="@android:color/transparent"
     android:gravity="center"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="200dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/blue_white"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp">
 
@@ -23,28 +23,27 @@
             android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgProfileItem"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                app:civ_border_color="@color/dark_gray"
-                app:civ_border_width="1dp"
-                android:src="@drawable/ic_profile"
+                android:id="@+id/imgProfileItemPost"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                app:civ_border_color="@color/blue"
+                app:civ_border_width="2dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
                 android:gravity="left"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/imgProfileItem"
-                app:layout_constraintStart_toEndOf="@+id/imgProfileItem"
-                app:layout_constraintTop_toTopOf="@+id/imgProfileItem">
+                app:layout_constraintBottom_toBottomOf="@+id/imgProfileItemPost"
+                app:layout_constraintStart_toEndOf="@+id/imgProfileItemPost"
+                app:layout_constraintTop_toTopOf="@+id/imgProfileItemPost">
 
                 <TextView
                     android:id="@+id/tvItemName"
@@ -53,55 +52,84 @@
                     android:text="Nombre"
                     android:textColor="@color/dark_blue"
                     android:textSize="18dp"
-                    android:textStyle="bold">
-
-                </TextView>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvItemUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text=" @Usuario"
                     android:textSize="16dp"
-                    android:textStyle="normal">
-
-                </TextView>
+                    android:textStyle="normal" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@+id/imgProfileItemPost"
+                app:layout_constraintTop_toBottomOf="@+id/imgProfileItemPost">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Materia: "
+                    android:textColor="@color/dark_blue"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Matemáticas"
+                    android:textColor="@color/black"
+                    android:textSize="17dp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvItemDescription"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="20dp"
-                android:textSize="16dp"
-                android:text="Descripción"
+                android:text="Descripción aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                 android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/imgProfileItem"></TextView>
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="@+id/imgProfileItemPost"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:text="x€"
                 android:textColor="@color/dark_blue"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </TextView>
+
+            <TextView
+                android:id="@+id/btnContactarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/green"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="CONTACTAR"
+                android:textColor="@android:color/white"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.cardview.widget.CardView>
-</LinearLayout>
-
-
+</androidx.constraintlayout.widget.ConstraintLayout>

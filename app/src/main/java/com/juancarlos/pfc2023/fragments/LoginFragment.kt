@@ -36,7 +36,6 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
 
         //Comprobar si hay una sesión iniciada
         var currentUserId = mainActivity.getCurrentUser()
-        //var currentUserId = -1
         if (currentUserId > 0) {
             mainActivity.goToFragment(SearchFragment())
         }

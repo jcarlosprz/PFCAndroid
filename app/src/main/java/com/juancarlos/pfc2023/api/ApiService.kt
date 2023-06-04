@@ -34,7 +34,7 @@ interface ApiService {
     fun deleteUser(@Path("id") id: String): Call<Unit>
 
     //Get Lista Ads
-    @GET("ads") //
+    @GET("ads?populate=*") //
     fun getAds(): Call<AdsListResponse>
 
     @GET("users/{id}?populate=ads")

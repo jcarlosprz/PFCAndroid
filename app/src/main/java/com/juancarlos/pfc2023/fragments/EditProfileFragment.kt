@@ -24,6 +24,7 @@ import com.juancarlos.pfc2023.MainActivity
 import com.juancarlos.pfc2023.R
 import com.juancarlos.pfc2023.api.ApiRest
 import com.juancarlos.pfc2023.api.data.UserData
+import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,7 +32,7 @@ import java.io.File
 import java.util.*
 
 
-class EditProfileFragment() : Fragment(R.layout.fragment_profile_edit) {
+class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
     lateinit var imgProfile: ImageView
     lateinit var currentUserData: UserData //Usuario
     lateinit var mainActivity: MainActivity
@@ -75,7 +76,9 @@ class EditProfileFragment() : Fragment(R.layout.fragment_profile_edit) {
                 view.findViewById<TextView>(R.id.etPEEmail).text.toString()
             currentUserData.contactPhone =
                 view.findViewById<TextView>(R.id.etPEPhone).text.toString()
-            currentUserData.imgURL = imgURLFirebase
+            if (imgURLFirebase != "") {
+                currentUserData.imgURL = imgURLFirebase
+            }
             updateUser(currentUserId, currentUserData)
 
         }
@@ -126,6 +129,7 @@ class EditProfileFragment() : Fragment(R.layout.fragment_profile_edit) {
         val dialog = builder.create()
         dialog.show()
     }
+
     //Verifica si todos los permisos necesarios han sido otorgados por el usuario
     fun permissionsGranted(): Boolean = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
@@ -228,6 +232,7 @@ class EditProfileFragment() : Fragment(R.layout.fragment_profile_edit) {
                     val etDescription = view.findViewById<TextView>(R.id.etPEDescription)
                     val etContactEmail = view.findViewById<TextView>(R.id.etPEEmail)
                     val etContactPhone = view.findViewById<TextView>(R.id.etPEPhone)
+                    val imgProfile = view.findViewById<CircleImageView>(R.id.imgProfileItem)
                     tvName.text = currentUserData.name
                     tvUsername.text = "@" + currentUserData.username
                     etDescription.text = currentUserData.description
@@ -240,6 +245,7 @@ class EditProfileFragment() : Fragment(R.layout.fragment_profile_edit) {
                     Log.e("getUser", response.errorBody()?.string() ?: "Error getting user:")
                 }
             }
+
             override fun onFailure(call: Call<UserData>, t: Throwable) {
                 Log.e("getUser", "Error: ${t.message}")
             }
