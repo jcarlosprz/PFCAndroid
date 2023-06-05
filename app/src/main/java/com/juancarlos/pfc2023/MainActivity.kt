@@ -8,7 +8,7 @@ import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.juancarlos.pfc2023.fragments.MyPostsFragment
+import com.juancarlos.pfc2023.fragments.MyAdsFragment
 import com.juancarlos.pfc2023.fragments.ProfileFragment
 import com.juancarlos.pfc2023.fragments.SearchFragment
 import com.juancarlos.pfc2023.fragments.WelcomeFragment
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<BottomNavigationView>(R.id.bottom_navigation_view).setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_search -> goToFragment(SearchFragment())
-                R.id.action_saved -> goToFragment(MyPostsFragment())
+                R.id.action_saved -> goToFragment(MyAdsFragment())
                 R.id.action_profile -> goToFragment(ProfileFragment())
             }
             true

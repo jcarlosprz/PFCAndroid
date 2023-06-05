@@ -9,12 +9,13 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview"
+        android:id="@+id/cvAdTeacher"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="225dp"
+        android:elevation="2dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        app:cardBackgroundColor="@color/blue_white"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp">
 
@@ -23,27 +24,25 @@
             android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgProfileItemPost"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
+                android:id="@+id/ivProfileAdTeacher"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                app:civ_border_color="@color/blue"
-                app:civ_border_width="2dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/llInfoTeacher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="left"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/imgProfileItemPost"
-                app:layout_constraintStart_toEndOf="@+id/imgProfileItemPost"
-                app:layout_constraintTop_toTopOf="@+id/imgProfileItemPost">
+                app:layout_constraintBottom_toBottomOf="@+id/ivProfileAdTeacher"
+                app:layout_constraintStart_toEndOf="@+id/ivProfileAdTeacher"
+                app:layout_constraintTop_toTopOf="@+id/ivProfileAdTeacher">
 
                 <TextView
                     android:id="@+id/tvItemName"
@@ -51,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:text="Nombre"
                     android:textColor="@color/dark_blue"
-                    android:textSize="18dp"
+                    android:textSize="17dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -59,50 +58,77 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" @Usuario"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     android:textStyle="normal" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout3"
+                android:id="@+id/llTeacherSubject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintStart_toStartOf="@+id/imgProfileItemPost"
-                app:layout_constraintTop_toBottomOf="@+id/imgProfileItemPost">
+                android:layout_marginTop="7dp"
+                app:layout_constraintStart_toStartOf="@+id/ivProfileAdTeacher"
+                app:layout_constraintTop_toBottomOf="@+id/ivProfileAdTeacher">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Materia: "
                     android:textColor="@color/dark_blue"
-                    android:textSize="17dp"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvAdTeacherSubject"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Matemáticas"
                     android:textColor="@color/black"
-                    android:textSize="17dp" />
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llTeacherAdModality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/ivProfileAdTeacher"
+                app:layout_constraintTop_toBottomOf="@+id/llTeacherSubject">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Modalidad: "
+                    android:textColor="@color/dark_blue"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvAdTeacherModality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Presencial"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvItemDescription"
+                android:id="@+id/tvAdTeacherDescription"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
                 android:text="Descripción aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/textView"
-                app:layout_constraintStart_toStartOf="@+id/imgProfileItemPost"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+                app:layout_constraintEnd_toEndOf="@+id/tvTeacherAdPrice"
+                app:layout_constraintStart_toStartOf="@+id/ivProfileAdTeacher"
+                app:layout_constraintTop_toBottomOf="@+id/llTeacherAdModality" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvTeacherAdPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="10dp"
                 android:text="x€"
                 android:textColor="@color/dark_blue"
