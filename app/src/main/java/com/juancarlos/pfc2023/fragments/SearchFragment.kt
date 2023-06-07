@@ -1,14 +1,10 @@
 package com.juancarlos.pfc2023.fragments
 
-import android.app.AlertDialog
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +23,7 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
     lateinit var mainActivity: MainActivity
     lateinit var adsList: List<AdsListResponse.Data>
 
+    var filtro = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainActivity = activity as MainActivity
@@ -38,7 +35,7 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
         //Mostrar el bottoNavigation
         mainActivity.showBottomNavigation()
         ApiRest.initService()
-        getAds()
+        getAds(filtro)
 
         var rvUserInfo = view?.findViewById<RecyclerView>(R.id.rvAnuncios)
         rvUserInfo?.layoutManager =
@@ -46,10 +43,37 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
         rvUserInfo?.adapter = AdsAdapter(adsList = emptyList())
 
 
+        var svSearchView = view.findViewById<SearchView>(R.id.svSearch)
+        // Configurar el listener de búsqueda
+        svSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Realizar la búsqueda aquí
+                if (!query.isNullOrEmpty()) {
+                    filtro = query
+                    getAds(filtro)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Actualizar la búsqueda mientras se escribe
+                filtro = newText!!
+                getAds(filtro)
+                return false
+            }
+        })
+
     }
 
-    private fun getAds() {
-        val call = ApiRest.service.getAds()
+    private fun getAds(filtro: String) {
+        val call = ApiRest.service.getAdsFiltered(
+            filtro,
+            filtro,
+            filtro,
+            filtro,
+            filtro,
+            "*"
+        )
         call.enqueue(object : Callback<AdsListResponse> {
             override fun onResponse(
                 call: Call<AdsListResponse>,

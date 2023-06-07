@@ -34,8 +34,15 @@ interface ApiService {
     fun deleteUser(@Path("id") id: String): Call<Unit>
 
     //Get Lista Ads
-    @GET("ads?populate=*") //
-    fun getAds(): Call<AdsListResponse>
+    @GET("ads?")
+    fun getAdsFiltered(
+        @Query("filters[\$or][0][subject][\$containsi]") subject: String,
+        @Query("filters[\$or][1][description][\$containsi]") description: String,
+        @Query("filters[\$or][2][modality][\$containsi]") modality: String,
+        @Query("filters[\$or][3][price][\$containsi]") price: String,
+        @Query("filters[\$or][4][ubication][\$containsi]") ubication: String,
+        @Query("populate") populate: String
+    ): Call<AdsListResponse>
 
     @GET("users/{id}?populate=ads")
     fun getUserAds(@Path("id") id: String): Call<UserAdsResponse>
