@@ -15,6 +15,7 @@ data class AdsListResponse(
             val price: Double,
             val subject: String,
             val ubication: String,
+            val adProfesor: Boolean,
             val updatedAt: String
         ) {
             data class Creator(

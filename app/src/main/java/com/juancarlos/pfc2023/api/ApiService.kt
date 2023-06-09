@@ -41,6 +41,7 @@ interface ApiService {
         @Query("filters[\$or][2][modality][\$containsi]") modality: String,
         @Query("filters[\$or][3][price][\$containsi]") price: String,
         @Query("filters[\$or][4][ubication][\$containsi]") ubication: String,
+        @Query("filters[adProfesor]") adProfesor: Boolean,
         @Query("populate") populate: String
     ): Call<AdsListResponse>
 

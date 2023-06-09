@@ -13,6 +13,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/svSearch"
             android:layout_width="match_parent"
@@ -21,6 +22,47 @@
             app:iconifiedByDefault="false"
             android:textAppearance="@color/white"
             app:queryBackground="@android:color/transparent"></androidx.appcompat.widget.SearchView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue_white" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/textOption1"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:onClick="onOptionClicked"
+                android:paddingBottom="2dp"
+                android:text="Profesores"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textOption2"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:onClick="onOptionClicked"
+                android:paddingBottom="2dp"
+                android:text="Alumnos"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvAnuncios"

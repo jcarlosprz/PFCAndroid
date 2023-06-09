@@ -1,10 +1,11 @@
 package com.juancarlos.pfc2023.fragments
-
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AlphaAnimation
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,8 @@ import retrofit2.Response
 class SearchFragment() : Fragment(R.layout.fragment_search) {
     lateinit var mainActivity: MainActivity
     lateinit var adsList: List<AdsListResponse.Data>
-
+    private var currentOption: TextView? = null
+    var isProfesor = true
     var filtro = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,6 +64,54 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
                 return false
             }
         })
+        var textOption1 = view.findViewById<TextView>(R.id.textOption1)
+        var textOption2 = view.findViewById<TextView>(R.id.textOption2)
+        currentOption = if (isProfesor) {
+            textOption1
+
+        } else {
+            textOption2
+        }
+        selectOption(currentOption!!) // Inicializar con la primera opción
+        textOption1.setOnClickListener {
+            onOptionClicked(it)
+            isProfesor = true
+            getAds(filtro)
+            // Lógica para el caso del profesor
+            println("Eres un profesor.")
+        }
+
+        textOption2.setOnClickListener {
+            onOptionClicked(it)
+            isProfesor = false
+            getAds(filtro)
+            // Lógica para el caso del alumno
+            println("Eres un alumno.")
+        }
+    }
+
+    fun onOptionClicked(view: View) {
+        val option = view as TextView
+        if (option != currentOption) {
+            deselectOption(currentOption!!)
+            selectOption(option)
+            currentOption = option
+
+
+        }
+    }
+
+    private fun selectOption(textView: TextView) {
+        textView.setTextColor(resources.getColor(R.color.green))
+        textView.setBackgroundColor(resources.getColor(R.color.blue_white))
+        val fadeInAnimation = AlphaAnimation(0f, 1f)
+        fadeInAnimation.duration = 500
+        textView.startAnimation(fadeInAnimation)
+    }
+
+    private fun deselectOption(textView: TextView) {
+        textView.setTextColor(resources.getColor(R.color.white))
+        textView.setBackgroundColor(resources.getColor(R.color.blue))
 
     }
 
@@ -72,6 +122,7 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
             filtro,
             filtro,
             filtro,
+            isProfesor,
             "*"
         )
         call.enqueue(object : Callback<AdsListResponse> {
