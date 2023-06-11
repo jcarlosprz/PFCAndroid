@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.container, WelcomeFragment())
             .commit()
         //Navegación BottonNavigationView
-        setupKeyboardVisibilityListener()
         findViewById<BottomNavigationView>(R.id.bottom_navigation_view).setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_search -> goToFragment(SearchFragment())
@@ -62,10 +61,11 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
         bottomNavigationView.visibility = View.VISIBLE
     }
-//Ocultar bottomnavigation al abrir el teclado
-    private fun setupKeyboardVisibilityListener() {
+
+    //Ocultar bottomnavigation al abrir el teclado
+    fun setupKeyboardVisibilityListener(mostrarBottom:Boolean) {
         val rootView = findViewById<View>(android.R.id.content)
-        val bottomNavigationView=findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
         rootView.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
             private val windowVisibleDisplayFrame = Rect()
@@ -86,7 +86,12 @@ class MainActivity : AppCompatActivity() {
                         bottomNavigationView.visibility = View.GONE
                     } else {
                         // El teclado está cerrado, mostrar el BottomNavigationView
-                        bottomNavigationView.visibility = View.VISIBLE
+                        if (mostrarBottom){
+                            bottomNavigationView.visibility = View.VISIBLE
+                        }else{
+                            bottomNavigationView.visibility = View.INVISIBLE
+                        }
+
                     }
                 }
             }

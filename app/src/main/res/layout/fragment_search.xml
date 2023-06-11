@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/blue_white"
+    android:background="@color/background"
     tools:context=".fragments.LoginFragment">
 
     <LinearLayout
@@ -26,7 +26,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/blue_white" />
+            android:background="@color/background" />
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:layout_marginBottom="5dp">
 
             <TextView
-                android:id="@+id/textOption1"
+                android:id="@+id/OptionProfesores"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
@@ -49,7 +49,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textOption2"
+                android:id="@+id/OptionAlumnos"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
@@ -68,7 +68,7 @@
             android:id="@+id/rvAnuncios"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:paddingBottom="5dp"
             android:layout_marginBottom="60dp">
 
         </androidx.recyclerview.widget.RecyclerView>

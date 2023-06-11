@@ -1,6 +1,6 @@
 package com.juancarlos.pfc2023.api.data
 
-data class UserAdsResponse(
+data class UserAdsListResponse(
     val ads: List<Ad>,
     val blocked: Boolean,
     val confirmed: Boolean,

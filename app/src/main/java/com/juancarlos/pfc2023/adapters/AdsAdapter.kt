@@ -14,13 +14,14 @@ import com.bumptech.glide.Glide
 import com.juancarlos.pfc2023.R
 import com.juancarlos.pfc2023.api.data.AdsListResponse
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlin.math.floor
 
 class AdsAdapter(private val adsList: List<AdsListResponse.Data>) :
     RecyclerView.Adapter<AdsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_teacher_post, parent, false)
+                .inflate(R.layout.item_ads, parent, false)
         return ViewHolder(view)
     }
 
@@ -40,18 +41,23 @@ class AdsAdapter(private val adsList: List<AdsListResponse.Data>) :
             val imgProfile = itemView.findViewById<CircleImageView>(R.id.ivProfileAdTeacher)
             val name = itemView.findViewById<TextView>(R.id.tvItemName)
             val username = itemView.findViewById<TextView>(R.id.tvItemUsername)
-            val price = itemView.findViewById<TextView>(R.id.tvTeacherAdPrice)
+            val price = itemView.findViewById<TextView>(R.id.tvAdPrice)
             val subject = itemView.findViewById<TextView>(R.id.tvAdTeacherSubject)
             val modality = itemView.findViewById<TextView>(R.id.tvAdTeacherModality)
-
+            val description = itemView.findViewById<TextView>(R.id.tvAdTeacherDescription)
+            if (addata.attributes.price == floor(addata.attributes.price)) {
+                price.text = addata.attributes.price.toInt().toString() + "€"
+            } else {
+                price.text = addata.attributes.price.toString() + "€"
+            }
             Glide.with(itemView)
                 .load(addata.attributes.creator.data.attributes.imgURL)
                 .into(imgProfile)
             name.text = addata.attributes.creator.data.attributes.name
             username.text = "@" + addata.attributes.creator.data.attributes.username
-            price.text = addata.attributes.price.toInt().toString() + "€"
             subject.text = addata.attributes.subject
             modality.text = addata.attributes.modality
+            description.text = addata.attributes.description
 
             var btnContactar = itemView.findViewById<TextView>(R.id.btnContactarItem)
             btnContactar.setOnClickListener {

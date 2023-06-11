@@ -3,30 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="30dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:text="¿Qué estás buscando?"
             android:textAlignment="center"
             android:textColor="@color/dark_blue"
-            android:textSize="25dp"
+            android:textSize="23dp"
             android:textStyle="bold"></TextView>
 
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:backgroundTint="@color/background"
+            android:id="@+id/cvRolProfesor"
+            android:layout_width="310dp"
+            android:layout_height="130dp"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
@@ -36,8 +39,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_marginLeft="20dp"
 
                     android:scaleType="centerCrop"
@@ -47,18 +50,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Profesores"
-                    android:textColor="@color/black"
-                    android:textSize="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:text="Profesor"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="23dp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:id="@+id/cvRolAlumno"
+            android:layout_width="310dp"
+            android:layout_height="130dp"
             android:layout_marginTop="25dp"
-            android:backgroundTint="@color/background"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="10dp">
 
             <LinearLayout
@@ -68,8 +74,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
+                    android:layout_width="80dp"
+                    android:layout_height="70dp"
                     android:layout_marginLeft="15dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_student"></ImageView>
@@ -78,9 +84,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
                     android:text="Alumnos"
-                    android:textColor="@color/black"
-                    android:textSize="30dp"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="23dp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

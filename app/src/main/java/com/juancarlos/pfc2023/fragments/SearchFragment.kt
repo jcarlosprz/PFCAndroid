@@ -29,7 +29,7 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainActivity = activity as MainActivity
-
+        mainActivity.setupKeyboardVisibilityListener(true)
         //Establecer colores del SearchView
         var searchView = view.findViewById<SearchView>(R.id.svSearch)
         changeSearchViewColors(searchView, android.R.color.white)
@@ -64,29 +64,24 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
                 return false
             }
         })
-        var textOption1 = view.findViewById<TextView>(R.id.textOption1)
-        var textOption2 = view.findViewById<TextView>(R.id.textOption2)
+        var OptionProfesores = view.findViewById<TextView>(R.id.OptionProfesores)
+        var OptionAlumnos = view.findViewById<TextView>(R.id.OptionAlumnos)
         currentOption = if (isProfesor) {
-            textOption1
-
+            OptionProfesores
         } else {
-            textOption2
+            OptionAlumnos
         }
         selectOption(currentOption!!) // Inicializar con la primera opción
-        textOption1.setOnClickListener {
+        OptionProfesores.setOnClickListener {
             onOptionClicked(it)
             isProfesor = true
             getAds(filtro)
-            // Lógica para el caso del profesor
-            println("Eres un profesor.")
         }
 
-        textOption2.setOnClickListener {
+        OptionAlumnos.setOnClickListener {
             onOptionClicked(it)
             isProfesor = false
             getAds(filtro)
-            // Lógica para el caso del alumno
-            println("Eres un alumno.")
         }
     }
 
@@ -96,14 +91,11 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
             deselectOption(currentOption!!)
             selectOption(option)
             currentOption = option
-
-
         }
     }
-
     private fun selectOption(textView: TextView) {
         textView.setTextColor(resources.getColor(R.color.green))
-        textView.setBackgroundColor(resources.getColor(R.color.blue_white))
+        textView.setBackgroundColor(resources.getColor(R.color.background))
         val fadeInAnimation = AlphaAnimation(0f, 1f)
         fadeInAnimation.duration = 500
         textView.startAnimation(fadeInAnimation)

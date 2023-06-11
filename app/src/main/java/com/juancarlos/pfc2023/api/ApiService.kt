@@ -45,7 +45,14 @@ interface ApiService {
         @Query("populate") populate: String
     ): Call<AdsListResponse>
 
-    @GET("users/{id}?populate=ads")
-    fun getUserAds(@Path("id") id: String): Call<UserAdsResponse>
+    @GET("users/{id}?")
+    fun getUserAds(
+        @Path("id") id: String,
+        @Query("populate") populate: String = "ads",
+    ): Call<UserAdsListResponse>
 
+    @POST("ads")
+    fun createAd(
+        @Body AdData: AdData
+    ): Call<AdData>
 }
