@@ -55,4 +55,7 @@ interface ApiService {
     fun createAd(
         @Body AdData: AdData
     ): Call<AdData>
+
+    @DELETE("ads/{id}")
+    fun deleteAd(@Path("id") id: String): Call<Unit>
 }

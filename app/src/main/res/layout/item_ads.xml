@@ -71,6 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
+                    android:layout_marginLeft="5dp"
                     app:layout_constraintStart_toStartOf="@+id/ivProfileAdTeacher"
                     app:layout_constraintTop_toBottomOf="@+id/ivProfileAdTeacher">
 
@@ -90,13 +91,38 @@
                         android:textColor="@color/black"
                         android:textSize="16dp" />
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llTeacherAdUbication"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/ivProfileAdTeacher"
+                    app:layout_constraintTop_toBottomOf="@+id/llTeacherSubject">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ubicación: "
+                        android:textColor="@color/dark_blue"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvAdTeacherUbication"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Madrid"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llTeacherAdModality"
                     android:layout_width="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="@+id/ivProfileAdTeacher"
-                    app:layout_constraintTop_toBottomOf="@+id/llTeacherSubject">
+                    app:layout_constraintTop_toBottomOf="@+id/llTeacherAdUbication">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -104,6 +130,7 @@
                         android:text="Modalidad: "
                         android:textColor="@color/dark_blue"
                         android:textSize="16dp"
+
                         android:textStyle="bold" />
 
                     <TextView
@@ -115,20 +142,23 @@
                         android:textSize="16dp" />
                 </LinearLayout>
 
+
                 <TextView
                     android:id="@+id/tvAdTeacherDescription"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginBottom="12dp"
+                    android:paddingBottom="10dp"
                     android:text="Descripción aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     app:layout_constraintBottom_toTopOf="@+id/btnContactarItem"
-                    app:layout_constraintEnd_toEndOf="@+id/tvMyAdPrice"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/ivProfileAdTeacher"
-                    app:layout_constraintTop_toBottomOf="@+id/llTeacherAdModality" />
+                    app:layout_constraintTop_toBottomOf="@+id/llTeacherAdModality"
+                    />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -167,8 +197,8 @@
                     android:editable="false"
                     android:focusable="true"
                     android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
                     android:text="CONTACTAR"
                     android:textColor="@android:color/white"
                     android:textSize="15dp"

@@ -44,6 +44,7 @@ class AdsAdapter(private val adsList: List<AdsListResponse.Data>) :
             val price = itemView.findViewById<TextView>(R.id.tvAdPrice)
             val subject = itemView.findViewById<TextView>(R.id.tvAdTeacherSubject)
             val modality = itemView.findViewById<TextView>(R.id.tvAdTeacherModality)
+            val ubication = itemView.findViewById<TextView>(R.id.tvAdTeacherUbication)
             val description = itemView.findViewById<TextView>(R.id.tvAdTeacherDescription)
             if (addata.attributes.price == floor(addata.attributes.price)) {
                 price.text = addata.attributes.price.toInt().toString() + "€"
@@ -58,7 +59,7 @@ class AdsAdapter(private val adsList: List<AdsListResponse.Data>) :
             subject.text = addata.attributes.subject
             modality.text = addata.attributes.modality
             description.text = addata.attributes.description
-
+            ubication.text = addata.attributes.ubication
             var btnContactar = itemView.findViewById<TextView>(R.id.btnContactarItem)
             btnContactar.setOnClickListener {
                 showPopup(itemView, addata)

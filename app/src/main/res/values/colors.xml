@@ -18,9 +18,5 @@
     <color name="dark_gray">#3C3C3C</color>
     <color name="red">#FF1200</color>
 
-    <color name="selected_option_background">#FF0000</color> <!-- Color de fondo para la opción seleccionada -->
-    <color name="default_option_background">#CCCCCC</color> <!-- Color de fondo para la opción deseleccionada -->
-    <color name="selected_option_text_color">#FF0000</color>
-    <color name="default_option_text_color">#000000</color>
 
 </resources>

@@ -23,7 +23,7 @@ import kotlin.properties.Delegates
 class MyAdsFragment() : Fragment(R.layout.fragment_myads) {
     lateinit var mainActivity: MainActivity
     var currentUser by Delegates.notNull<Int>()
-    var myads = emptyList<UserAdsListResponse.Ad>()
+    var myads: MutableList<UserAdsListResponse.Ad> = mutableListOf()
     private var currentOption: TextView? = null
     var isProfesor = true
 
@@ -105,9 +105,10 @@ class MyAdsFragment() : Fragment(R.layout.fragment_myads) {
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
                     myads = body.ads
-                    val filteredAdsList = myads.filter { ad -> ad.adProfesor == adProfesor }
+                    val filteredAdsList: MutableList<UserAdsListResponse.Ad> = myads.filter { ad -> ad.adProfesor == adProfesor }.toMutableList()
                     var rvSaved = view?.findViewById<RecyclerView>(R.id.rvSaved)
-                    rvSaved?.adapter = MyAdsAdapter(filteredAdsList)
+                    rvSaved?.adapter =
+                        MyAdsAdapter(filteredAdsList)
 
                     Log.i("getUserAds", response.body()!!.ads.toString())
 
