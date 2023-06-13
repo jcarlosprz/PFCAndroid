@@ -4,45 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="60dp"
 
     tools:context=".fragments.LoginFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20dp">
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/btnPEGuardar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="GUARDAR"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></Button>
 
             <Button
                 android:id="@+id/btnPEDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ELIMINAR CUENTA"
+                android:text="ELIMINAR"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnPEGuardar"></Button>
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgProfileItem"
-                android:layout_width="135dp"
-                android:layout_height="134dp"
-                android:layout_marginTop="10dp"
+                android:id="@+id/imgEP"
+                android:layout_width="115dp"
+                android:layout_height="115dp"
+                android:layout_marginTop="20dp"
                 android:src="@color/blue_white"
-                app:civ_border_color="@color/blue"
-                app:civ_border_width="3dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,19 +39,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre Completo"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/dark_blue"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgProfileItem"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/imgEP"></TextView>
 
             <TextView
                 android:id="@+id/tvPEUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:layout_marginBottom="0dp"
+                android:paddingBottom="20dp"
                 android:text=" @Usuario"
                 android:textSize="16dp"
                 android:textStyle="normal"
@@ -72,82 +60,152 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvPEName"></TextView>
 
-            <EditText
-                android:id="@+id/etPEDescription"
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:paddingBottom="20dp"
-                android:text="Descripción aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-                android:textSize="18dp"
-                app:layout_constraintTop_toBottomOf="@+id/tvPEUsername"
-                tools:layout_editor_absoluteX="20dp"></EditText>
+                android:background="@color/background"
+                android:paddingTop="15dp"
+                android:paddingBottom="5dp"
+                android:text="INFORMACIÓN PERSONAL:"
+                android:textAlignment="center"
+                android:textColor="@color/dark_blue"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/tvPEUsername"></TextView>
 
-            <androidx.cardview.widget.CardView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:backgroundTint="@color/background"
-                app:cardCornerRadius="10dp"
+                android:layout_height="0dp"
+                android:fillViewport="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPEDescription">
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintVertical_bias="0.0">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="40dp"
-                    android:gravity="center|top"
-                    android:orientation="vertical">
+                    android:background="@color/background"
+                    android:orientation="vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="0dp"
+                    android:paddingRight="30dp"
+                    android:paddingBottom="20dp">
+
 
                     <TextView
-                        android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Información de contacto"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Nombre:"
                         android:textColor="@color/dark_blue"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgProfileItem"></TextView>
+                        android:textSize="18dp"
+                        android:textStyle="bold"></TextView>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="20dp"
-                        android:hint="Telefono"
-                        android:textColorHint="@color/light_grey"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etPEPhone"
+                            android:id="@+id/etPEName"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:backgroundTint="@color/white"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:maxLines="1"
-                            android:paddingTop="20dp" />
+                            android:paddingTop="8dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Usuario:"
+
+                        android:textColor="@color/dark_blue"
+                        android:textSize="18dp"
+                        android:textStyle="bold"></TextView>
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="20dp"
-                        android:hint="Email"
-                        android:textColorHint="@color/light_grey"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPEUsername"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="@color/white"
+                            android:inputType="text"
+
+                            android:maxLines="1"
+                            android:paddingTop="8dp" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Descripción:"
+
+                        android:textColor="@color/dark_blue"
+                        android:textSize="18dp"
+                        android:textStyle="bold"></TextView>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPEDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:gravity="top"
+                            android:imeOptions="flagNoEnterAction"
+                            android:inputType="textMultiLine"
+                            android:maxLines="10"
+                            android:minLines="5"
+                            android:paddingTop="15dp"
+                            android:paddingBottom="15dp"
+                            android:scrollbars="vertical"
+                            android:textSize="16sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="5dp"
+
+
+                        android:text="Email:"
+                        android:textColor="@color/dark_blue"
+                        android:textSize="18dp"
+                        android:textStyle="bold"></TextView>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large">
@@ -155,21 +213,68 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etPEEmail"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:backgroundTint="@color/white"
-                            android:inputType="textEmailAddress"
+                            android:inputType="text"
+
                             android:maxLines="1"
-                            android:paddingTop="20dp" />
+                            android:paddingTop="8dp" />
+
 
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Telefono:"
+
+                        android:textColor="@color/dark_blue"
+                        android:textSize="18dp"
+                        android:textStyle="bold"></TextView>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPEPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="@color/white"
+                            android:inputType="text"
+
+                            android:maxLines="1"
+                            android:paddingTop="8dp" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnUpdateUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:backgroundTint="@color/green"
+                        android:text="GUARDAR"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:cornerRadius="16dp"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout6"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+                    </com.google.android.material.button.MaterialButton>
                 </LinearLayout>
+            </ScrollView>
 
-
-            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </ScrollView>
 
 
 </FrameLayout>

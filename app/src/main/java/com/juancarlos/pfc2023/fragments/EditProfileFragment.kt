@@ -59,21 +59,22 @@ class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
         super.onViewCreated(view, savedInstanceState)
         //Declaracion de variables
         mainActivity = activity as MainActivity
+        mainActivity.hideBottomNavigation()
+        mainActivity.setupKeyboardVisibilityListener(false)
         currentUserId = mainActivity.getCurrentUser().toString()
 
 
-        //Mostrar el bottomNavigation
-        this.mainActivity.showBottomNavigation()
 
         ApiRest.initService()
         getUser(currentUserId, view)
         //Función Guardar (Actualiza el usuario con un PUT)
-        view.findViewById<Button>(R.id.btnPEGuardar).setOnClickListener {
+        view.findViewById<Button>(R.id.btnUpdateUser).setOnClickListener {
             //Actualiza los valores del objeto
             currentUserData.description =
                 view.findViewById<TextView>(R.id.etPEDescription).text.toString()
             currentUserData.contactEmail =
                 view.findViewById<TextView>(R.id.etPEEmail).text.toString()
+            currentUserData.email = view.findViewById<TextView>(R.id.etPEEmail).text.toString()
             currentUserData.contactPhone =
                 view.findViewById<TextView>(R.id.etPEPhone).text.toString()
             if (imgURLFirebase != "") {
@@ -90,11 +91,11 @@ class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
         }
 
         //Pop-up
-        view.findViewById<ImageView>(R.id.imgProfileItem).setOnClickListener {
+        view.findViewById<ImageView>(R.id.imgEP).setOnClickListener {
             showPopup()
         }
         //Abrir Galeria y Camara
-        imgProfile = view.findViewById(R.id.imgProfileItem)
+        imgProfile = view.findViewById(R.id.imgEP)
 
 
     }
@@ -229,14 +230,18 @@ class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
                     currentUserData = body
                     val tvName = view.findViewById<TextView>(R.id.tvPEName)
                     val tvUsername = view.findViewById<TextView>(R.id.tvPEUsername)
+                    val etName = view.findViewById<TextView>(R.id.etPEName)
+                    val etUsername = view.findViewById<TextView>(R.id.etPEUsername)
                     val etDescription = view.findViewById<TextView>(R.id.etPEDescription)
-                    val etContactEmail = view.findViewById<TextView>(R.id.etPEEmail)
+                    val etEmail = view.findViewById<TextView>(R.id.etPEEmail)
                     val etContactPhone = view.findViewById<TextView>(R.id.etPEPhone)
-                    val imgProfile = view.findViewById<CircleImageView>(R.id.imgProfileItem)
+                    val imgProfile = view.findViewById<CircleImageView>(R.id.imgEP)
                     tvName.text = currentUserData.name
+                    etName.text = currentUserData.name
                     tvUsername.text = "@" + currentUserData.username
+                    etUsername.text = currentUserData.username
                     etDescription.text = currentUserData.description
-                    etContactEmail.text = currentUserData.contactEmail
+                    etEmail.text = currentUserData.email
                     etContactPhone.text = currentUserData.contactPhone
                     Glide.with(view)
                         .load(currentUserData.imgURL)

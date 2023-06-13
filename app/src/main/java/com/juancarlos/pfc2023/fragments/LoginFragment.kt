@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import com.juancarlos.pfc2023.MainActivity
 import com.juancarlos.pfc2023.R
@@ -36,9 +37,9 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
 
         //Comprobar si hay una sesión iniciada
         var currentUserId = mainActivity.getCurrentUser()
-        if (currentUserId > 0) {
-            mainActivity.goToFragment(SearchFragment())
-        }
+      //  if (currentUserId > 0) {
+       //     mainActivity.goToFragment(SearchFragment())
+       // }
         //Hacer Login al pulsar el botón
         ApiRest.initService()
         val btnLogin = view.findViewById<Button>(R.id.btnLogin)
@@ -84,7 +85,7 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
                     val errorMessage = errorObject.getString("message")
                     var tvError = view?.findViewById<TextView>(R.id.tvLoginError)
                     if (errorMessage == "identifier is a required field" || errorMessage == "password is a required field") {
-                        tvError?.text = "Rellena todos los campos"
+                        tvError?.text = "Usuario o contraseña incorrectos"
                     } else if (errorMessage == "Invalid identifier or password") {
                         tvError?.text = "Usuario o contraseña incorrectos"
                     }

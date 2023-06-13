@@ -19,7 +19,7 @@ interface ApiService {
     ): Call<LoginResponse>
 
     //Actualizar Usuario
-    @PUT("users/{id}") //
+    @PUT("users/{id}?populate=ads") //
     fun updateUser(
         @Body updatedUser: UserData,
         @Path("id") id: String
@@ -28,6 +28,7 @@ interface ApiService {
     //Get del Usuario
     @GET("users/{id}")
     fun getUserById(@Path("id") id: String): Call<UserData>
+
 
     //Borrar Usuario
     @DELETE("users/{id}")

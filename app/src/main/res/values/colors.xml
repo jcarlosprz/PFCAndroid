@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Colores personalizados -->
+
+    <color name="overimg">#80686868</color>
     <color name="background">#E8ECF3</color>
     <color name="dark_blue">#163667</color>
     <color name="blue">#214F95</color>
