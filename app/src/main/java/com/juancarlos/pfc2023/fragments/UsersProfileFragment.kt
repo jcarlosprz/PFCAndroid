@@ -1,6 +1,5 @@
 package com.juancarlos.pfc2023.fragments
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -24,8 +23,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class ProfileFragment() : Fragment(R.layout.fragment_profile) {
-
+class UsersProfileFragment() : Fragment(R.layout.fragment_profile_user) {
+    var adProfesor = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -33,26 +32,24 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
         val mainActivity = activity as MainActivity
         mainActivity.showBottomNavigation()
 
-        var currentUserId = mainActivity.getCurrentUser()
-        getUserById(currentUserId.toString())
-
-        view.findViewById<Button>(R.id.btnEditar)
-            .setOnClickListener { mainActivity.goToFragment(EditProfileFragment(), true) }
-
-        view.findViewById<Button>(R.id.btnSalir)
-            .setOnClickListener {
-                val sharedPreferences =
-                    requireContext().getSharedPreferences("login", Context.MODE_PRIVATE)
-                val editor = sharedPreferences.edit()
-                editor.putInt("userID", -1)
-                editor.apply()
-                mainActivity.goToFragment(LoginFragment(), false)
-            }
-
-
         val llDescription: LinearLayout = view.findViewById(R.id.llProfileDescription)
         val scrollView: ScrollView = view.findViewById(R.id.svProfile)
         setupSwipeAnimation(llDescription, scrollView)
+
+        val userId =
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                arguments?.getInt("userId")
+            } else {
+                arguments?.getInt("userId")
+            }
+        adProfesor =
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                arguments?.getBoolean("adProfesor")!!
+            } else {
+                arguments?.getBoolean("adProfesor")!!
+            }
+        ApiRest.initService()
+        getUserById(userId.toString())
 
 
     }
@@ -148,9 +145,12 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
                     }
                     if (user.ads != null) {
                         val myads: MutableList<UserAdsListResponse.Ad> = user.ads.toMutableList()
+                        val filteredAdsList: MutableList<UserAdsListResponse.Ad> =
+                            myads.filter { ad -> ad.adProfesor == adProfesor }.toMutableList()
+
                         val rvUserInfo = view?.findViewById<RecyclerView>(R.id.rvUserAds)
                         rvUserInfo?.layoutManager = LinearLayoutManager(context)
-                        rvUserInfo?.adapter = UserAdsAdapter(myads)
+                        rvUserInfo?.adapter = UserAdsAdapter(filteredAdsList)
                     } else {
                         Log.e("TAG", "User ads is null")
                     }

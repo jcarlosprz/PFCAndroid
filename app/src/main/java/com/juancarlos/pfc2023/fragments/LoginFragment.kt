@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import com.juancarlos.pfc2023.MainActivity
 import com.juancarlos.pfc2023.R
@@ -31,15 +30,15 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainActivity = activity as MainActivity
-
+        mainActivity.setupKeyboardVisibilityListener(false)
         //Ocultar el bottomnavigation
         mainActivity.hideBottomNavigation()
 
         //Comprobar si hay una sesión iniciada
         var currentUserId = mainActivity.getCurrentUser()
-      //  if (currentUserId > 0) {
-       //     mainActivity.goToFragment(SearchFragment())
-       // }
+        if (currentUserId > 0) {
+            mainActivity.goToFragment(SearchFragment())
+        }
         //Hacer Login al pulsar el botón
         ApiRest.initService()
         val btnLogin = view.findViewById<Button>(R.id.btnLogin)

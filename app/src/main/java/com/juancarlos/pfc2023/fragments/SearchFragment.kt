@@ -42,7 +42,7 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
         var rvUserInfo = view?.findViewById<RecyclerView>(R.id.rvAnuncios)
         rvUserInfo?.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rvUserInfo?.adapter = AdsAdapter(adsList = emptyList())
+        rvUserInfo?.adapter = AdsAdapter(adsList = emptyList()) {}
 
 
         var svSearchView = view.findViewById<SearchView>(R.id.svSearch)
@@ -126,7 +126,17 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
                 if (response.isSuccessful && body != null) {
                     adsList = body.data
                     var rvUserInfo = view?.findViewById<RecyclerView>(R.id.rvAnuncios)
-                    rvUserInfo?.adapter = AdsAdapter(adsList)
+                    rvUserInfo?.adapter = AdsAdapter(adsList) { ad ->
+
+                        activity?.let {
+                            val fragment = UsersProfileFragment()
+                            fragment.arguments = Bundle()
+                            fragment.arguments?.putInt("userId", ad.attributes.creator.data.id)
+                            fragment.arguments?.putBoolean("adProfesor", ad.attributes.adProfesor)
+
+                            mainActivity.goToFragment(fragment, true)
+                        }
+                    }
                     Log.i("getAds", adsList.toString())
                 } else {
                     Log.e("getAds", response.errorBody()?.string() ?: "Error getting user:")

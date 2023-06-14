@@ -70,11 +70,14 @@ class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
         //Función Guardar (Actualiza el usuario con un PUT)
         view.findViewById<Button>(R.id.btnUpdateUser).setOnClickListener {
             //Actualiza los valores del objeto
+            currentUserData.name = view.findViewById<TextView>(R.id.etPEName).text.toString()
+            currentUserData.username =
+                view.findViewById<TextView>(R.id.etPEUsername).text.toString()
             currentUserData.description =
                 view.findViewById<TextView>(R.id.etPEDescription).text.toString()
+            currentUserData.email = view.findViewById<TextView>(R.id.etPEEmail).text.toString()
             currentUserData.contactEmail =
                 view.findViewById<TextView>(R.id.etPEEmail).text.toString()
-            currentUserData.email = view.findViewById<TextView>(R.id.etPEEmail).text.toString()
             currentUserData.contactPhone =
                 view.findViewById<TextView>(R.id.etPEPhone).text.toString()
             if (imgURLFirebase != "") {

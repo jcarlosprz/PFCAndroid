@@ -3,6 +3,7 @@ package com.juancarlos.pfc2023.adapters
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,7 @@ import com.juancarlos.pfc2023.api.data.AdsListResponse
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlin.math.floor
 
-class AdsAdapter(private val adsList: List<AdsListResponse.Data>) :
+class AdsAdapter(private val adsList: List<AdsListResponse.Data>, val OnClick: (AdsListResponse.Data) -> Unit) :
     RecyclerView.Adapter<AdsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -60,9 +61,14 @@ class AdsAdapter(private val adsList: List<AdsListResponse.Data>) :
             modality.text = addata.attributes.modality
             description.text = addata.attributes.description
             ubication.text = addata.attributes.ubication
+
             var btnContactar = itemView.findViewById<TextView>(R.id.btnContactarItem)
             btnContactar.setOnClickListener {
                 showPopup(itemView, addata)
+            }
+            itemView.setOnClickListener {
+                OnClick(addata)
+
             }
         }
 

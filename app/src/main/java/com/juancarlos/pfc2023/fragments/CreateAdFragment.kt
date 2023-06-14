@@ -42,21 +42,26 @@ class CreateAdFragment() : Fragment(R.layout.fragment_createad) {
             var description =
                 view.findViewById<EditText>(R.id.etCreateAdDescription).text.toString()
             var modality = view.findViewById<EditText>(R.id.etCreateAdModality).text.toString()
-            var price = view.findViewById<EditText>(R.id.etCreateAdPrice).text.toString().toDouble()
+            var price =
+                view.findViewById<EditText>(R.id.etCreateAdPrice).text.toString().toDoubleOrNull()
             var subject = view.findViewById<EditText>(R.id.etCreateAdSubject).text.toString()
             var ubication = view.findViewById<EditText>(R.id.etCreateAdUbication).text.toString()
-            var adData = AdData(
-                data = AdData.Data(
-                    creator = currentUser,
-                    description = description,
-                    modality = modality,
-                    price = price,
-                    subject = subject,
-                    ubication = ubication,
-                    adProfesor = isProfesor
+            if (currentUser != null && description != null && modality != null && price != null && subject != null && ubication != null && isProfesor != null) {
+                var adData = AdData(
+                    data = AdData.Data(
+                        creator = currentUser,
+                        description = description,
+                        modality = modality,
+                        price = price,
+                        subject = subject,
+                        ubication = ubication,
+                        adProfesor = isProfesor
+                    )
                 )
-            )
-            createAd(adData)
+                createAd(adData)
+            }
+
+
         }
     }
 

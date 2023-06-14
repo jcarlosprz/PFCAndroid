@@ -15,14 +15,6 @@
             android:layout_height="match_parent">
 
 
-            <Button
-                android:id="@+id/btnPEDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ELIMINAR"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnPEGuardar"></Button>
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgEP"
                 android:layout_width="115dp"
@@ -90,7 +82,7 @@
                     android:paddingLeft="30dp"
                     android:paddingTop="0dp"
                     android:paddingRight="30dp"
-                    android:paddingBottom="20dp">
+                    android:paddingBottom="5dp">
 
 
                     <TextView
@@ -262,8 +254,26 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="10dp"
                         android:backgroundTint="@color/green"
-                        android:text="GUARDAR"
+                        android:text="GUARDAR CAMBIOS"
                         android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:cornerRadius="16dp"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout6"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+                    </com.google.android.material.button.MaterialButton>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPEDelete"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@color/background"
+                        android:elevation="0dp"
+                        android:text="ELIMINAR CUENTA"
+                        android:textColor="@color/red"
+                        android:textSize="15dp"
                         android:textStyle="bold"
                         app:cornerRadius="16dp"
                         app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
