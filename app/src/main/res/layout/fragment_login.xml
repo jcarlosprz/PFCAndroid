@@ -120,6 +120,34 @@
                 app:cornerRadius="16dp">
 
             </com.google.android.material.button.MaterialButton>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Aún no tienes cuenta?"
+                    android:textColor="@color/blue_white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"></TextView>
+
+                <Button
+                    android:id="@+id/btnLoginirRegistro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Registrate"
+                    android:textAllCaps="false"
+                    android:textColor="@color/green"
+                    android:textSize="16dp"
+                    android:background="@android:color/transparent"
+                    android:textStyle="bold"></Button>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

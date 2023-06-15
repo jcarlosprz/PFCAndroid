@@ -57,6 +57,17 @@ interface ApiService {
         @Body AdData: AdData
     ): Call<AdData>
 
+    @GET("ads/{id}?")
+    fun getAd(
+        @Path("id") id: String,
+    ): Call<AdByIdResponse>
+
+    @PUT("ads/{id}?") //
+    fun updateAd(
+        @Body updatedAd: AdData,
+        @Path("id") id: String
+    ): Call<AdData>
+
     @DELETE("ads/{id}")
     fun deleteAd(@Path("id") id: String): Call<Unit>
 }

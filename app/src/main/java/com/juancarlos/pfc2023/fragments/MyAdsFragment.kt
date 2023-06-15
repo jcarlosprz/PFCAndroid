@@ -38,7 +38,7 @@ class MyAdsFragment() : Fragment(R.layout.fragment_myads) {
         //Crear Adapter
         var rvSaved = view.findViewById<RecyclerView>(R.id.rvSaved)
         rvSaved.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rvSaved.adapter = MyAdsAdapter(myads)
+        rvSaved.adapter = MyAdsAdapter(myads) {}
 
         view.findViewById<CardView>(R.id.addPost).setOnClickListener {
             mainActivity.goToFragment(SelectRole(), true)
@@ -108,7 +108,16 @@ class MyAdsFragment() : Fragment(R.layout.fragment_myads) {
                     val filteredAdsList: MutableList<UserAdsListResponse.Ad> = myads.filter { ad -> ad.adProfesor == adProfesor }.toMutableList()
                     var rvSaved = view?.findViewById<RecyclerView>(R.id.rvSaved)
                     rvSaved?.adapter =
-                        MyAdsAdapter(filteredAdsList)
+                        MyAdsAdapter(filteredAdsList) { ad ->
+                            activity?.let {
+                                val fragment = EditAdFragment()
+                                fragment.arguments = Bundle()
+                                fragment.arguments?.putInt("adId", ad.id)
+
+                                mainActivity.goToFragment(fragment, true)
+                            }
+
+                        }
 
                     Log.i("getUserAds", response.body()!!.ads.toString())
 

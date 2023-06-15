@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.juancarlos.pfc2023.R
@@ -85,13 +86,13 @@ class AdsAdapter(private val adsList: List<AdsListResponse.Data>, val OnClick: (
         builder.setView(view)
 
         // Configurar botones u otros elementos en el layout personalizado
-        view.findViewById<Button>(R.id.btnPhoneContact).setOnClickListener {
+        view.findViewById<CardView>(R.id.btnPhoneContact).setOnClickListener {
             val intent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse("tel:$contactPhone")
             }
             itemView.context.startActivity(intent)
         }
-        view.findViewById<Button>(R.id.btnEmailContact).setOnClickListener {
+        view.findViewById<CardView>(R.id.btnEmailContact).setOnClickListener {
             val subject =
                 "Clases de " + addata.attributes.subject // Reemplaza esto con el asunto deseado
             val intent = Intent(Intent.ACTION_SEND).apply {

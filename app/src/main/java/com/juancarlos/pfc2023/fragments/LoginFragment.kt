@@ -22,11 +22,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.ParseException
+import kotlin.properties.Delegates
 
 
 class LoginFragment() : Fragment(R.layout.fragment_login) {
     lateinit var mainActivity: MainActivity
-
+    var isChecked by Delegates.notNull<Boolean>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainActivity = activity as MainActivity
@@ -51,12 +52,32 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
 
         //Radio Button Recuerdame
         val radioButton = view.findViewById<RadioButton>(R.id.rbRecordar)
-        var isChecked = false
+        val sharedPreferencesGet =
+            requireContext().getSharedPreferences("remember", Context.MODE_PRIVATE)
+        isChecked = sharedPreferencesGet.getBoolean("isChecked", false)
+        radioButton.isChecked = isChecked
+        if (isChecked) {
+            val sharedPreferencesGet =
+                requireContext().getSharedPreferences("remember", Context.MODE_PRIVATE)
+            var user = sharedPreferencesGet.getString("user", "")
+            var password = sharedPreferencesGet.getString("password", "")
+            view.findViewById<TextView>(R.id.etLoginEmail).text = user
+            view.findViewById<TextView>(R.id.etLoginPassword).text = password
+        }
         radioButton.setOnClickListener {
             isChecked = !isChecked
             radioButton.isChecked = isChecked
+            val sharedPreferences =
+                requireContext().getSharedPreferences("remember", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("isChecked", isChecked)
+
         }
 
+        val btnirRegistro = view.findViewById<Button>(R.id.btnLoginirRegistro)
+        btnirRegistro.setOnClickListener {
+            mainActivity.goToFragment(RegisterFragment(), true)
+        }
 
     }
 
@@ -73,6 +94,16 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
                     val tokenString = response.body()?.jwt
                     try {
                         saveLoginLocally(tokenString!!)
+                        if (isChecked) {
+                            val sharedPreferencesGet =
+                                requireContext().getSharedPreferences("remember", Context.MODE_PRIVATE)
+                            val user = view?.findViewById<TextView>(R.id.etLoginEmail)?.text.toString()
+                            val password = view?.findViewById<TextView>(R.id.etLoginPassword)?.text.toString()
+                            val editor = sharedPreferencesGet.edit()
+                            editor.putString("user", user)
+                            editor.putString("password", password)
+                            editor.apply()
+                        }
                         mainActivity.goToFragment(SearchFragment(), true)
                     } catch (e: ParseException) {
                         Log.e("LoginFragment", "Failed to parse JWT token: ${e.message}")

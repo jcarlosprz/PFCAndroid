@@ -51,7 +51,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="35dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginRight="35dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -123,7 +123,6 @@
                             android:layout_height="match_parent"
                             android:backgroundTint="@color/white"
                             android:inputType="text"
-
                             android:maxLines="1"
                             android:paddingTop="8dp" />
 
@@ -265,10 +264,10 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCreateAd"
+                    android:id="@+id/btnEditAd"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="35dp"
                     android:backgroundTint="@color/green"
                     android:text="GUARDAR"
@@ -297,7 +296,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
                     app:layout_constraintStart_toStartOf="@+id/linearLayout6"
-                    app:layout_constraintTop_toBottomOf="@+id/btnCreateAd">
+                    app:layout_constraintTop_toBottomOf="@+id/btnEditAd">
 
                 </com.google.android.material.button.MaterialButton>
 

@@ -8,17 +8,16 @@ import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.juancarlos.pfc2023.fragments.MyAdsFragment
-import com.juancarlos.pfc2023.fragments.ProfileFragment
-import com.juancarlos.pfc2023.fragments.SearchFragment
-import com.juancarlos.pfc2023.fragments.WelcomeFragment
+import com.juancarlos.pfc2023.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Comprobar si hay una sesión iniciada
+
         setContentView(R.layout.activity_main)
-        supportFragmentManager.beginTransaction().replace(R.id.container, WelcomeFragment())
+        supportFragmentManager.beginTransaction().replace(R.id.container, LoginFragment())
             .commit()
         //Navegación BottonNavigationView
         findViewById<BottomNavigationView>(R.id.bottom_navigation_view).setOnItemSelectedListener {

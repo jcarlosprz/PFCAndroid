@@ -9,13 +9,17 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.juancarlos.pfc2023.R
 import com.juancarlos.pfc2023.api.ApiRest
+import com.juancarlos.pfc2023.api.data.AdsListResponse
 import com.juancarlos.pfc2023.api.data.UserAdsListResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.math.floor
 
-class MyAdsAdapter(private val myads: MutableList<UserAdsListResponse.Ad>) :
+class MyAdsAdapter(
+    private val myads: MutableList<UserAdsListResponse.Ad>,
+    val OnClick: (UserAdsListResponse.Ad) -> Unit
+) :
     RecyclerView.Adapter<MyAdsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_myads, parent, false)
@@ -47,35 +51,13 @@ class MyAdsAdapter(private val myads: MutableList<UserAdsListResponse.Ad>) :
             } else {
                 price.text = ad.price.toString() + "€"
             }
-            val btnEliminar = itemView.findViewById<CardView>(R.id.btnEliminarItem)
-            btnEliminar.setOnClickListener {
-                Log.i("ELIMINAR", ad.id.toString())
-                deleteAd(ad)
-            }
-            //  itemView.setOnClickListener {
-            //     Log.v("Pulso sobre", item.displayName.toString())
 
-            //  }
+            itemView.setOnClickListener {
+                OnClick(ad)
+            }
         }
 
 
     }
 
-    private fun deleteAd(ad: UserAdsListResponse.Ad) {
-        val call = ApiRest.service.deleteAd(ad.id.toString())
-        call.enqueue(object : Callback<Unit> {
-            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                if (response.isSuccessful) {
-                    myads.remove(ad)
-                    notifyDataSetChanged()
-                } else {
-                    Log.e("deleteUser", response.errorBody()?.string() ?: "Error deleting user")
-                }
-            }
-
-            override fun onFailure(call: Call<Unit>, t: Throwable) {
-                Log.e("deleteUser", "Error: ${t.message}")
-            }
-        })
-    }
 }
