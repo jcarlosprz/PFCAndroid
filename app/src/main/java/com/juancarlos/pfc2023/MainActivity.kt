@@ -8,7 +8,10 @@ import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.juancarlos.pfc2023.fragments.*
+import com.juancarlos.pfc2023.fragments.LoginFragment
+import com.juancarlos.pfc2023.fragments.MyAdsFragment
+import com.juancarlos.pfc2023.fragments.ProfileFragment
+import com.juancarlos.pfc2023.fragments.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -87,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                         // El teclado está cerrado, mostrar el BottomNavigationView
                         if (mostrarBottom){
                             bottomNavigationView.visibility = View.VISIBLE
-                        }else{
+                        } else {
                             bottomNavigationView.visibility = View.INVISIBLE
                         }
 
@@ -95,5 +98,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    fun setBottomNavigationSelectedItem(index: Int) {
+        val menuItem =
+            findViewById<BottomNavigationView>(R.id.bottom_navigation_view).menu.getItem(index)
+        menuItem.isChecked = true
     }
 }

@@ -32,10 +32,13 @@ class RegisterFragment() : Fragment(R.layout.fragment_register) {
         }
 
         view.findViewById<Button>(R.id.btnRegister).setOnClickListener {
+            var name = view.findViewById<EditText>(R.id.etRegisterName).text.toString()
+            var username = view.findViewById<EditText>(R.id.etRegisterUsername).text.toString()
             var email = view.findViewById<EditText>(R.id.etRegisterEmail).text.toString()
-            var username = view.findViewById<EditText>(R.id.etRegisterName).text.toString()
+            var phone = view.findViewById<EditText>(R.id.etRegisterPhone).text.toString()
+            var birthday = view.findViewById<EditText>(R.id.etRegisterDate).text.toString()
             var password = view.findViewById<EditText>(R.id.etRegisterPassword).text.toString()
-            register(email, password, username)
+            register(name, username, email, phone, birthday, password)
             mainActivity.goToFragment(LoginFragment())
         }
 
@@ -45,8 +48,15 @@ class RegisterFragment() : Fragment(R.layout.fragment_register) {
 
     }
 
-    private fun register(email: String, password: String, username: String) {
-        val crearUser = RegisterData(email, password, username)
+    private fun register(
+        name: String,
+        username: String,
+        email: String,
+        phone: String,
+        birthday: String,
+        password: String
+    ) {
+        val crearUser = RegisterData(name, username, email, email, phone, birthday, password)
         val call = ApiRest.service.meterUser(crearUser)
         call.enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(

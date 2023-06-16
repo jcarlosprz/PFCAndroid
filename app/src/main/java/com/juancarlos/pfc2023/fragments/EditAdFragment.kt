@@ -1,5 +1,6 @@
 package com.juancarlos.pfc2023.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -60,10 +61,21 @@ class EditAdFragment() : Fragment(R.layout.fragment_editad) {
             updateAd(adId.toString(), ad)
 
         }
-
+        //Alert Eliminar
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Eliminar Anuncio")
+            .setMessage("¿Estás seguro/a?\nEsta acción no se puede deshacer.")
+            .setPositiveButton("Eliminar") { dialog, which ->
+                deleteAd(adId.toString())
+            }
+            .setNegativeButton("Cancelar") { dialog, which ->
+                // Acciones a realizar si el usuario presiona el botón "No"
+            }
+        val alerta = builder.create()
+        //Acción botón
         val btnEliminar = view.findViewById<Button>(R.id.btnDeleteAd)
         btnEliminar.setOnClickListener {
-            deleteAd(adId.toString())
+            alerta.show()
         }
 
     }

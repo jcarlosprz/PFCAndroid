@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -86,11 +87,21 @@ class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
             updateUser(currentUserId, currentUserData)
 
         }
-
+        //Alert Eliminar
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Eliminar Anuncio")
+            .setMessage("¿Estás seguro/a?\nEsta acción no se puede deshacer.")
+            .setPositiveButton("Eliminar") { dialog, which ->
+                deleteUser(currentUserId)
+                mainActivity.goToFragment(LoginFragment())
+            }
+            .setNegativeButton("Cancelar") { dialog, which ->
+                // Acciones a realizar si el usuario presiona el botón "No"
+            }
+        val alerta = builder.create()
         //Eliminar usuario
         view.findViewById<Button>(R.id.btnPEDelete).setOnClickListener {
-            deleteUser(currentUserId)
-            mainActivity.goToFragment(LoginFragment())
+            alerta.show()
         }
 
         //Pop-up
@@ -112,21 +123,11 @@ class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
 
         // Configurar botones u otros elementos en el layout personalizado
 
-        builder.setPositiveButton("Aceptar") { dialog, which ->
-            // Acciones al hacer clic en el botón "Aceptar"
-            Toast.makeText(requireContext(), "Aceptar", Toast.LENGTH_SHORT).show()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton("Cancelar") { dialog, which ->
-            // Acciones al hacer clic en el botón "Cancelar"
-            Toast.makeText(requireContext(), "Cancelar", Toast.LENGTH_SHORT).show()
-            dialog.dismiss()
-        }
-        view.findViewById<Button>(R.id.btnGaleria).setOnClickListener {
+        view.findViewById<CardView>(R.id.btnGaleria).setOnClickListener {
             checkPermissions()
             startGallery()
         }
-        view.findViewById<Button>(R.id.btnCamera).setOnClickListener {
+        view.findViewById<CardView>(R.id.btnCamera).setOnClickListener {
             checkPermissions()
             startCamera()
         }

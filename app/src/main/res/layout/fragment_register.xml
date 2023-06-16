@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="30dp"
                 android:text="Rellena los siguientes campos:"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -46,7 +47,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/blue_white"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:paddingTop="30dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Nombre de usuario"
+                android:textColorHint="@color/light_grey"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRegisterUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/blue_white"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:paddingTop="30dp" />
 
@@ -92,6 +114,27 @@
                     android:hint="Fecha nacimiento"
                     android:paddingTop="30dp" />
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="Teléfono"
+                    android:textColorHint="@color/light_grey"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRegisterPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/blue_white"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:paddingTop="30dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -115,24 +158,6 @@
                     android:paddingTop="30dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Repetir contraseña"
-                android:textColorHint="@color/light_grey"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/blue_white"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:paddingTop="30dp" />
-            </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.button.MaterialButton

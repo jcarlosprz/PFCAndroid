@@ -46,6 +46,7 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
                 val editor = sharedPreferences.edit()
                 editor.putInt("userID", -1)
                 editor.apply()
+                mainActivity.setBottomNavigationSelectedItem(0)
                 mainActivity.goToFragment(LoginFragment(), false)
             }
 
@@ -114,7 +115,11 @@ class ProfileFragment() : Fragment(R.layout.fragment_profile) {
                     username?.text = "@" + user.username
                     phone?.text = user.contactPhone
                     mail?.text = user.contactEmail
-                    description?.text = user.description
+                    if (user.description == "" || user.description == null) {
+                        description?.text = "Sin descripción"
+                    } else {
+                        description?.text = user.description
+                    }
                     Glide.with(view!!)
                         .load(user.imgURL)
                         .into(imgProfile!!)

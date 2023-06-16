@@ -30,6 +30,7 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
         super.onViewCreated(view, savedInstanceState)
         mainActivity = activity as MainActivity
         mainActivity.setupKeyboardVisibilityListener(true)
+
         //Establecer colores del SearchView
         var searchView = view.findViewById<SearchView>(R.id.svSearch)
         changeSearchViewColors(searchView, android.R.color.white)
