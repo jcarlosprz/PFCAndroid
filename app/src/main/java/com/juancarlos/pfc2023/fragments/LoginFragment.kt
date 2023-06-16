@@ -71,8 +71,9 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
                 requireContext().getSharedPreferences("remember", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.putBoolean("isChecked", isChecked)
-
+            editor.apply() // Aplicar los cambios en SharedPreferences
         }
+
 
         val btnirRegistro = view.findViewById<Button>(R.id.btnLoginirRegistro)
         btnirRegistro.setOnClickListener {
@@ -100,6 +101,7 @@ class LoginFragment() : Fragment(R.layout.fragment_login) {
                             val user = view?.findViewById<TextView>(R.id.etLoginEmail)?.text.toString()
                             val password = view?.findViewById<TextView>(R.id.etLoginPassword)?.text.toString()
                             val editor = sharedPreferencesGet.edit()
+                            editor.putBoolean("isChecked", isChecked)
                             editor.putString("user", user)
                             editor.putString("password", password)
                             editor.apply()

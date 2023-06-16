@@ -25,6 +25,8 @@ class RegisterFragment() : Fragment(R.layout.fragment_register) {
         //Ocultar el bottomNavigation
         val mainActivity = activity as MainActivity
         mainActivity.hideBottomNavigation()
+
+
         view.findViewById<EditText>(R.id.etRegisterDate).setOnClickListener() {
             showDatePickerDialog()
         }
@@ -35,6 +37,10 @@ class RegisterFragment() : Fragment(R.layout.fragment_register) {
             var password = view.findViewById<EditText>(R.id.etRegisterPassword).text.toString()
             register(email, password, username)
             mainActivity.goToFragment(LoginFragment())
+        }
+
+        view.findViewById<Button>(R.id.btnLoginirRegistro).setOnClickListener() {
+            mainActivity.goToFragment(LoginFragment(), true)
         }
 
     }
