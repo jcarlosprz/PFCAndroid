@@ -25,7 +25,7 @@ class MyAdsFragment() : Fragment(R.layout.fragment_myads) {
     var currentUser by Delegates.notNull<Int>()
     var myads: MutableList<UserAdsListResponse.Ad> = mutableListOf()
     private var currentOption: TextView? = null
-    var isProfesor = true
+    var isProfesor = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,22 +46,23 @@ class MyAdsFragment() : Fragment(R.layout.fragment_myads) {
         var OptionProfesores = view.findViewById<TextView>(R.id.OptionProfesoresMyAds)
         var OptionAlumnos = view.findViewById<TextView>(R.id.OptionAlumnosMyAds)
         currentOption = if (isProfesor) {
-            OptionProfesores
-        } else {
             OptionAlumnos
+        } else {
+            OptionProfesores
+
         }
         getUserAds(currentUser.toString(), isProfesor)
         selectOption(currentOption!!) // Inicializar con la primera opción
         OptionProfesores.setOnClickListener {
             onOptionClicked(it)
-            isProfesor = true
+            isProfesor = false
             getUserAds(currentUser.toString(), isProfesor)
 
         }
 
         OptionAlumnos.setOnClickListener {
             onOptionClicked(it)
-            isProfesor = false
+            isProfesor = true
             getUserAds(currentUser.toString(), isProfesor)
         }
     }
