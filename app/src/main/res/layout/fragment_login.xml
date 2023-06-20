@@ -33,9 +33,10 @@
                 app:layout_constraintStart_toStartOf="parent"></TextView>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiLoginEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="Nombre de usuario o email"
                 android:textColorHint="@color/light_grey"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"

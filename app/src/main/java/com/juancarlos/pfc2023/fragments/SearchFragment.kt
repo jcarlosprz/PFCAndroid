@@ -67,6 +67,7 @@ class SearchFragment() : Fragment(R.layout.fragment_search) {
         })
         var OptionProfesores = view.findViewById<TextView>(R.id.OptionProfesores)
         var OptionAlumnos = view.findViewById<TextView>(R.id.OptionAlumnos)
+        //Selección por defectos
         currentOption = if (isProfesor) {
             OptionProfesores
         } else {

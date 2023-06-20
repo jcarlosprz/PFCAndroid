@@ -8,10 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.webkit.MimeTypeMap
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
@@ -26,6 +23,7 @@ import com.juancarlos.pfc2023.R
 import com.juancarlos.pfc2023.api.ApiRest
 import com.juancarlos.pfc2023.api.data.UserData
 import de.hdodenhof.circleimageview.CircleImageView
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -71,25 +69,38 @@ class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
         //Función Guardar (Actualiza el usuario con un PUT)
         view.findViewById<Button>(R.id.btnUpdateUser).setOnClickListener {
             //Actualiza los valores del objeto
-            currentUserData.name = view.findViewById<TextView>(R.id.etPEName).text.toString()
-            currentUserData.username =
-                view.findViewById<TextView>(R.id.etPEUsername).text.toString()
-            currentUserData.description =
-                view.findViewById<TextView>(R.id.etPEDescription).text.toString()
-            currentUserData.email = view.findViewById<TextView>(R.id.etPEEmail).text.toString()
-            currentUserData.contactEmail =
-                view.findViewById<TextView>(R.id.etPEEmail).text.toString()
-            currentUserData.contactPhone =
-                view.findViewById<TextView>(R.id.etPEPhone).text.toString()
-            if (imgURLFirebase != "") {
-                currentUserData.imgURL = imgURLFirebase
+            val etName = view.findViewById<TextView>(R.id.etPEName).text.toString()
+            val etUsername = view.findViewById<TextView>(R.id.etPEUsername).text.toString()
+            val etDescription = view.findViewById<TextView>(R.id.etPEDescription).text.toString()
+            val etEmail = view.findViewById<TextView>(R.id.etPEEmail).text.toString()
+            val etPhone = view.findViewById<TextView>(R.id.etPEPhone).text.toString()
+            val tvError = view.findViewById<TextView>(R.id.tvEditProfileError)
+            if (etName == "" || etUsername == "" || etEmail == "" || etPhone == "") {
+                tvError.text = "Rellena todos los campos necesarios"
+            } else if (!validarNumeroTelefono(etPhone)) {
+                tvError.text = "Número de teléfono no válido"
+            } else {
+                currentUserData.name = view.findViewById<TextView>(R.id.etPEName).text.toString()
+                currentUserData.username =
+                    view.findViewById<TextView>(R.id.etPEUsername).text.toString()
+                currentUserData.description =
+                    view.findViewById<TextView>(R.id.etPEDescription).text.toString()
+                currentUserData.email = view.findViewById<TextView>(R.id.etPEEmail).text.toString()
+                currentUserData.contactEmail =
+                    view.findViewById<TextView>(R.id.etPEEmail).text.toString()
+                currentUserData.contactPhone =
+                    view.findViewById<TextView>(R.id.etPEPhone).text.toString()
+                if (imgURLFirebase != "") {
+                    currentUserData.imgURL = imgURLFirebase
+                }
+                updateUser(currentUserId, currentUserData)
             }
-            updateUser(currentUserId, currentUserData)
+
 
         }
         //Alert Eliminar
         val builder = AlertDialog.Builder(context)
-        builder.setTitle("Eliminar Anuncio")
+        builder.setTitle("Eliminar Cuenta")
             .setMessage("¿Estás seguro/a?\nEsta acción no se puede deshacer.")
             .setPositiveButton("Eliminar") { dialog, which ->
                 deleteUser(currentUserId)
@@ -100,7 +111,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
             }
         val alerta = builder.create()
         //Eliminar usuario
-        view.findViewById<Button>(R.id.btnPEDelete).setOnClickListener {
+        view.findViewById<ImageButton>(R.id.btnPEDelete).setOnClickListener {
             alerta.show()
         }
 
@@ -274,9 +285,20 @@ class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
                         Toast.LENGTH_SHORT
                     )
                         .show()
+
                     mainActivity.goToFragment(ProfileFragment())
                 } else {
-                    Log.e("updateUser", response.errorBody()?.string() ?: "Error updating user")
+                    val errorBody = response.errorBody()?.string()
+                    val errorJson = JSONObject(errorBody)
+                    val errorObject = errorJson.getJSONObject("error")
+                    val errorMessage = errorObject.getString("message")
+                    var tvError = view?.findViewById<TextView>(R.id.tvEditProfileError)!!
+                    Log.e("updateUser", errorMessage)
+                    if (errorMessage == "Username already taken") {
+                        tvError.text = "El nombre de usuario ya está en uso"
+                    } else if (errorMessage == "Email already taken") {
+                        tvError.text = "El email ya está en uso"
+                    }
                 }
             }
 
@@ -307,5 +329,10 @@ class EditProfileFragment : Fragment(R.layout.fragment_profile_edit) {
                 Log.e("deleteUser", "Error: ${t.message}")
             }
         })
+    }
+
+    fun validarNumeroTelefono(numero: String): Boolean {
+        val patron = Regex("^[0-9]{9}\$")
+        return patron.matches(numero)
     }
 }

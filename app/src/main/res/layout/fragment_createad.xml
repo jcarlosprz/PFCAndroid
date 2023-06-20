@@ -266,20 +266,32 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tvCreateADError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/red"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout6"></TextView>
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCreateAd"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="35dp"
                     android:backgroundTint="@color/green"
                     android:text="CONTINUAR"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     app:cornerRadius="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/linearLayout6"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+                    app:layout_constraintTop_toBottomOf="@+id/tvCreateADError">
 
                 </com.google.android.material.button.MaterialButton>
 

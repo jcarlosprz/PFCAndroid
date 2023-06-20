@@ -34,6 +34,22 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
+            <ImageButton
+                android:id="@+id/btnDeleteAd"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+               android:layout_marginLeft="-90dp"
+                android:background="@android:color/transparent"
+                android:paddingTop="6dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="6dp"
+
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_delete">
+            </ImageButton>
+
+
         </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
@@ -262,42 +278,36 @@
 
 
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/tvEditADError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textColor="@color/red"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout6"></TextView>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnEditAd"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
                     android:backgroundTint="@color/green"
                     android:text="GUARDAR"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     app:cornerRadius="16dp"
+
                     app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
                     app:layout_constraintStart_toStartOf="@+id/linearLayout6"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+                    app:layout_constraintTop_toBottomOf="@+id/tvEditADError">
 
                 </com.google.android.material.button.MaterialButton>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnDeleteAd"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
 
-                    android:background="@android:color/transparent"
-                    android:backgroundTint="@color/background"
-                    android:elevation="0dp"
-                    android:text="ELIMINAR ANUNCIO"
-                    android:textColor="@color/red"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    app:cornerRadius="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
-                    app:layout_constraintStart_toStartOf="@+id/linearLayout6"
-                    app:layout_constraintTop_toBottomOf="@+id/btnEditAd">
-
-                </com.google.android.material.button.MaterialButton>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

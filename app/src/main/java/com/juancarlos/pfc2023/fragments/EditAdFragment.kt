@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -46,20 +47,24 @@ class EditAdFragment() : Fragment(R.layout.fragment_editad) {
             var etModality = view.findViewById<TextView>(R.id.etEditAdModality)!!
             var etDescription = view.findViewById<TextView>(R.id.etEditAdDescription)!!
             var etPrice = view.findViewById<TextView>(R.id.etEditAdPrice)!!
-
-            val ad = AdData(
-                data = AdData.Data(
-                    creator = currentUser,
-                    description = etDescription.text.toString(),
-                    modality = etModality.text.toString(),
-                    price = etPrice.text.toString().toDouble(),
-                    subject = etSubject.text.toString(),
-                    ubication = etUbication.text.toString(),
-                    adProfesor = currentAd.data.attributes.adProfesor
+            val tvError = view.findViewById<TextView>(R.id.tvEditADError)
+            if (etSubject.text.isEmpty() || etUbication.text.isEmpty() || etModality.text.isEmpty() || etDescription.text.isEmpty() || etPrice.text.isEmpty()) {
+                tvError.text = "Rellena todos los campos"
+            } else {
+                val ad = AdData(
+                    data = AdData.Data(
+                        creator = currentUser,
+                        description = etDescription.text.toString(),
+                        modality = etModality.text.toString(),
+                        price = etPrice.text.toString().toDouble(),
+                        subject = etSubject.text.toString(),
+                        ubication = etUbication.text.toString(),
+                        adProfesor = currentAd.data.attributes.adProfesor
+                    )
                 )
-            )
-            updateAd(adId.toString(), ad)
-
+                tvError.text = ""
+                updateAd(adId.toString(), ad)
+            }
         }
         //Alert Eliminar
         val builder = AlertDialog.Builder(context)
@@ -73,7 +78,7 @@ class EditAdFragment() : Fragment(R.layout.fragment_editad) {
             }
         val alerta = builder.create()
         //Acción botón
-        val btnEliminar = view.findViewById<Button>(R.id.btnDeleteAd)
+        val btnEliminar = view.findViewById<ImageButton>(R.id.btnDeleteAd)
         btnEliminar.setOnClickListener {
             alerta.show()
         }

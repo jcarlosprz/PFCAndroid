@@ -8,7 +8,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.textfield.TextInputLayout
 import com.juancarlos.pfc2023.MainActivity
 import com.juancarlos.pfc2023.R
 import com.juancarlos.pfc2023.api.ApiRest

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.juancarlos.pfc2023.MainActivity
 import com.juancarlos.pfc2023.R
@@ -46,6 +47,7 @@ class CreateAdFragment() : Fragment(R.layout.fragment_createad) {
                 view.findViewById<EditText>(R.id.etCreateAdPrice).text.toString().toDoubleOrNull()
             var subject = view.findViewById<EditText>(R.id.etCreateAdSubject).text.toString()
             var ubication = view.findViewById<EditText>(R.id.etCreateAdUbication).text.toString()
+            val tvError = view.findViewById<TextView>(R.id.tvCreateADError)
             if (currentUser != null && description != null && modality != null && price != null && subject != null && ubication != null && isProfesor != null) {
                 var adData = AdData(
                     data = AdData.Data(
@@ -58,7 +60,10 @@ class CreateAdFragment() : Fragment(R.layout.fragment_createad) {
                         adProfesor = isProfesor
                     )
                 )
+                tvError.text = ""
                 createAd(adData)
+            } else {
+                tvError.text = "Rellena todos los campos"
             }
 
 
